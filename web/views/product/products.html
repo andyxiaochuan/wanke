@@ -106,6 +106,48 @@
 	{% block js %}
 	<script type="text/javascript">
 	
+
+	
+		//返回7天前后的时间，格式 ‘yyyy-mm-dd’
+		function date2str(yy, mm, dd, prenext) {
+		    var s, d, t, t2;
+		    t = Date.UTC(yy, mm, dd);
+		    t2 = 3 * 1000 * 3600 * 24; //加减7天的时间
+		    if (prenext == 'pre') {
+		        t-= t2;
+		    } else {
+		        t+= t2;
+		    }
+		    d = new Date(t);
+		    s = d.getUTCFullYear() + "-";
+		    s += ("00"+(d.getUTCMonth()+1)).slice(-2) + "-";
+		    s += ("00"+d.getUTCDate()).slice(-2);
+		    alert(s);
+		}
+		function str2date(str, prenext){   
+		  var   dd, mm, yy;   
+		  var   reg = /^(\d{4})-(\d{1,2})-(\d{1,2})$/;
+		  if (arr = str.match(reg)) {
+		    yy = Number(arr[1]);
+		    mm = Number(arr[2])-1;
+		    dd = Number(arr[3]);
+		  } else {
+		    var d = new Date();
+		    yy = d.getUTCFullYear();
+		    mm = ("00"+(d.getUTCMonth())).slice(-2);
+		    dd = ("00"+d.getUTCDate()).slice(-2);
+		  }
+		 if (prenext == null || (prenext != 'pre' && prenext != 'next')) {
+		    var prenext = 'pre';
+		  }
+		  date2str(yy, mm, dd, prenext);
+		} 
+		str2date('2008-2-28', 'next');
+
+
+
+
+
 	    $(document).ready(function() {
 	
 			$(document).delegate(".xa-delete","click",function(){
