@@ -1,0 +1,111 @@
+
+	{% extends "../userCenter_content_base.html" %}
+		{% block header_navs %}
+		    <li {% if first_nav_name == 'project' %}class="active"{% endif %}><a href="/userCenter/userCenter/">个人中心</a></li>
+		{% endblock %}
+		{% block content-panel %}
+	
+	<div class="xui-userCenterPage">
+				<div class="xui-i-content">
+					<a class="glyphicon glyphicon-plus btn btn-primary" href="/normalcompany/normalcompany/">Add normalcompany </a>
+					<table class="table table-bordered table-striped mt10 ">
+						<thead>
+							<tr>
+								
+								<th>ownerUserId</th>
+								
+								<th>ownerRegionalId</th>
+								
+								<th>price</th>
+								
+								<th>creatTime</th>
+								
+								<th>timePoints</th>
+								
+								<th>remark</th>
+								
+								<th>mode</th>
+								
+								<th>protocol</th>
+								
+								<th>操作</th>
+							</tr>
+						</thead>
+							<tbody>
+							{% for normalcompany in normalcompanys %}
+							<tr>
+								
+								<td>{{normalcompany.ownerUserId}}</td>
+								
+								<td>{{normalcompany.ownerRegionalId}}</td>
+								
+								<td>{{normalcompany.price}}</td>
+								
+								<td>{{normalcompany.creatTime}}</td>
+								
+								<td>{{normalcompany.timePoints}}</td>
+								
+								<td>{{normalcompany.remark}}</td>
+								
+								<td>{{normalcompany.mode}}</td>
+								
+								<td>{{normalcompany.protocol}}</td>
+								
+								<td> 
+									<a class="btn btn-primary " href="/normalcompany/normalcompany/?normalcompany_id={{normalcompany.id}}"> 编辑</a>
+									<a href="javascript:void(0);" class="btn btn-danger xa-delete" data-id={{normalcompany.id}}>删除</a>  
+								</td>
+							</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+	</div>
+	{% endblock %}
+	
+	{% block js %}
+	<script type="text/javascript">
+	
+	    $(document).ready(function() {
+	
+			$(document).delegate(".xa-delete","click",function(){
+				var normalcompany_id = $(this).attr("data-id");
+				var data = {};
+				
+				data.ownerUserId = $(".xa-ownerUserId").val();
+				
+				data.ownerRegionalId = $(".xa-ownerRegionalId").val();
+				
+				data.price = $(".xa-price").val();
+				
+				data.creatTime = $(".xa-creatTime").val();
+				
+				data.timePoints = $(".xa-timePoints").val();
+				
+				data.remark = $(".xa-remark").val();
+				
+				data.mode = $(".xa-mode").val();
+				
+				data.protocol = $(".xa-protocol").val();
+				
+				W.Resource.delete({
+	                    resource: 'project.normalcompany',
+	                    data: {
+	                        normalcompany_id: normalcompany_id
+	                    },
+	                    success: function(data) {
+	                        W.showHint('success', '删除成功');
+	                        _.delay(function() {
+	                            window.location.reload();
+	                        }, 1000);
+	                    },
+	                    error: function() {
+	                        W.showHint('error', '删除失败！');
+	                    }
+	            });
+			});
+	    	
+	    });
+	</script>
+	{% endblock %}
+	

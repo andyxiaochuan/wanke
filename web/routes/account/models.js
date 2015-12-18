@@ -18,9 +18,19 @@ var UserSchema = new mongoose.Schema({
 	is_superuser: {type:Boolean, default:false},
 	name: String,
 	real_name: String,
-	grade: String,
+	grade:  {type:Number, default:0},
 	is_active: {type:Boolean, default:true},
-	created_at: {type:Date, default:Date.now}
+	is_coach: {type:Boolean, default:false},
+	created_at: {type:Date, default:Date.now},
+	ponints: {type:Number, default:0},
+	is_verify: {type:Boolean, default:false},
+	idof_zfb: String,
+	idof_person: String,
+	idof_tel: String,
+	idof_qq: String,
+	idof_yy: String,
+	role: String,
+	fighting: String,
 }, {
 	collection: 'account_user'
 });

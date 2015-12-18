@@ -1,0 +1,129 @@
+{% extends "../content_base.html" %}
+	{% block header_navs %}
+	    <li {% if first_nav_name == 'project' %}class="active"{% endif %}><a href="/userCenter/userCenter/">个人中心</a></li>
+	{% endblock %}
+	{% block content-panel %}
+	
+	<div class="xui-userCenterPage">
+	
+		<div class="xui-wrap">
+			<div class="xui-i-left ">
+				
+				<ul>
+					<li><a href="/userCenter/userCenter">我的主页</a></li>
+					<li><a href="/product/product" class="active">发布订单</a></li>
+					<li><a href="/product/products">已购订单</a></li>
+					<li><a href="">账号设置</a></li>
+					<li><a href="">账户充值</a></li>
+					<li><a href="">我的积分</a></li>
+				</ul>
+				
+			</div>
+			<div class="xui-i-right">
+				<div class="xui-i-content">
+									
+						<div class="form-group">
+							<label for="inputEmail3" class="col-sm-3 control-label">idof_zfb"</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control xa-idof_zfb" value="{{yonghu.idof_zfb}}" placeholder="Email">
+							</div>
+						</div>
+									
+						<div class="form-group">
+							<label for="inputEmail3" class="col-sm-3 control-label">idof_person"</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control xa-idof_person" value="{{yonghu.idof_person}}" placeholder="Email">
+							</div>
+						</div>
+									
+						<div class="form-group">
+							<label for="inputEmail3" class="col-sm-3 control-label">idof_tel"</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control xa-idof_tel" value="{{yonghu.idof_tel}}" placeholder="Email">
+							</div>
+						</div>
+									
+						<div class="form-group">
+							<label for="inputEmail3" class="col-sm-3 control-label">idof_qq"</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control xa-idof_qq" value="{{yonghu.idof_qq}}" placeholder="Email">
+							</div>
+						</div>
+									
+						<div class="form-group">
+							<label for="inputEmail3" class="col-sm-3 control-label">idof_yy"</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control xa-idof_yy" value="{{yonghu.idof_yy}}" placeholder="Email">
+							</div>
+						</div>
+									
+						<div class="form-group">
+							<label for="inputEmail3" class="col-sm-3 control-label">is_coach"</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control xa-is_coach" value="{{yonghu.is_coach}}" placeholder="Email">
+							</div>
+						</div>
+									
+						<div class="form-group">
+							<label for="inputEmail3" class="col-sm-3 control-label">is_verify"</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control xa-is_verify" value="{{yonghu.is_verify}}" placeholder="Email">
+							</div>
+						</div>
+					
+					<div class="form-group">
+						<span class="btn btn-success mt20 mb30 xa-submit" data-id={{yonghu.id}}>保存</span>
+					</div>
+				</div>
+			</div>
+		</div>
+				
+		
+		
+	</div>
+	{% endblock %}
+	
+	
+	{% block js %}
+	<script type="text/javascript">
+	
+	    $(document).ready(function() {
+	
+			$(document).delegate(".xa-submit","click",function(){
+				var data = {};
+				
+				data.idof_zfb = $(".xa-idof_zfb").val();
+				
+				data.idof_person = $(".xa-idof_person").val();
+				
+				data.idof_tel = $(".xa-idof_tel").val();
+				
+				data.idof_qq = $(".xa-idof_qq").val();
+				
+				data.idof_yy = $(".xa-idof_yy").val();
+				
+				data.is_coach = $(".xa-is_coach").val();
+				
+				data.is_verify = $(".xa-is_verify").val();
+				
+				data.yonghuid = $(this).attr('data-id');
+				console.log(data);
+				W.Resource.put({
+					resource: 'yonghu.yonghu',
+					data: data,
+					success: function(data) {
+						W.showHint('success', '成功，重新加载页面...');
+						_.delay(function() {
+						    window.location.reload();
+						}, 1000);
+					},
+					error: function() {
+					W.showHint('error', '更新失败！');
+	        		}
+				})		
+	            
+			})
+	    });
+	</script>
+	{% endblock %}
+	

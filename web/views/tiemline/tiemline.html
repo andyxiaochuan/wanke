@@ -1,0 +1,98 @@
+
+	{% extends "../content_base.html" %}
+	{% block header_navs %}
+	    <li {% if first_nav_name == 'project' %}class="active"{% endif %}><a href="/userCenter/userCenter/">个人中心</a></li>
+	{% endblock %}
+	
+	{% block content-panel %}
+				<div class="xui-i-content">
+									
+						<div class="form-group">
+							<label for="inputEmail3" class="col-sm-3 control-label">text"</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control xa-text" value="{{tiemline.text}}" placeholder="Email">
+							</div>
+						</div>
+									
+						<div class="form-group">
+							<label for="inputEmail3" class="col-sm-3 control-label">name"</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control xa-name" value="{{tiemline.name}}" placeholder="Email">
+							</div>
+						</div>
+									
+						<div class="form-group">
+							<label for="inputEmail3" class="col-sm-3 control-label">feedman"</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control xa-feedman" value="{{tiemline.feedman}}" placeholder="Email">
+							</div>
+						</div>
+									
+						<div class="form-group">
+							<label for="inputEmail3" class="col-sm-3 control-label">content"</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control xa-content" value="{{tiemline.content}}" placeholder="Email">
+							</div>
+						</div>
+									
+						<div class="form-group">
+							<label for="inputEmail3" class="col-sm-3 control-label">mark"</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control xa-mark" value="{{tiemline.mark}}" placeholder="Email">
+							</div>
+						</div>
+									
+						<div class="form-group">
+							<label for="inputEmail3" class="col-sm-3 control-label">order"</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control xa-order" value="{{tiemline.order}}" placeholder="Email">
+							</div>
+						</div>
+					
+					<div class="form-group">
+						<span class="btn btn-success mt20 mb30 xa-submit" data-id={{tiemline.id}}>保存</span>
+					</div>
+				</div>
+	{% endblock %}
+	
+	{% block js %}
+	<script type="text/javascript">
+	
+	    $(document).ready(function() {
+	
+			$(document).delegate(".xa-submit","click",function(){
+				var data = {};
+				
+				data.text = $(".xa-text").val();
+				
+				data.name = $(".xa-name").val();
+				
+				data.feedman = $(".xa-feedman").val();
+				
+				data.content = $(".xa-content").val();
+				
+				data.mark = $(".xa-mark").val();
+				
+				data.order = $(".xa-order").val();
+				
+				data.tiemlineid = $(this).attr('data-id');
+				console.log(data);
+				W.Resource.put({
+					resource: 'tiemline.tiemline',
+					data: data,
+					success: function(data) {
+						W.showHint('success', '成功，重新加载页面...');
+						_.delay(function() {
+						    window.location.reload();
+						}, 1000);
+					},
+					error: function() {
+					W.showHint('error', '更新失败！');
+	        		}
+				})		
+	            
+			})
+	    });
+	</script>
+	{% endblock %}
+	

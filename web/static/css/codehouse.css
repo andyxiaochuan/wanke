@@ -149,6 +149,13 @@ html, body {
     background-size: cover;
 
 }
+.xui-user-img{
+    border-radius: 5px 5px 0px 0px;
+    width: 150px;
+    height: 170px;
+    background-size: cover;
+
+}
 
 .xui-projectPage .xui-wrap .xui-box .xui-info{
     margin-top:20px;
@@ -174,12 +181,7 @@ html, body {
 
 
 
-.xui-userCenterPage {
-    background-color: #f2f2f2;
-    height: 1000px;
-}
-
-.xui-userCenterPage .xui-wrap .xui-i-left{
+ .xui-wrap .xui-i-left{
     width: 200px;
     height: 100%;
     background-color: #fff;
@@ -187,10 +189,10 @@ html, body {
 
 }
 
-.xui-userCenterPage .xui-wrap{
+ .xui-wrap{
    padding-top: 20px;
 }
-.xui-userCenterPage .xui-wrap .xui-i-right{
+ .xui-wrap .xui-i-right{
     width: 800px;
     height: 100%;
     float: right;

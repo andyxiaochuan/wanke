@@ -1,0 +1,199 @@
+{% extends "../userCenter_content_base.html" %}
+	{% block header_navs %}
+	    <li {% if first_nav_name == 'project' %}class="active"{% endif %}><a href="/userCenter/userCenter/">个人中心</a></li>
+	{% endblock %}
+	{% block content-panel %}
+				<div class="xui-i-content">
+									
+						<div class="form-group">
+							<label for="inputEmail3" class="col-sm-3 control-label">区服</label>
+							<div class="col-sm-8">
+								<div className="form-group pt10">
+									<label className="col-sm-2 control-label"></label>
+									<div className="col-sm-8">
+										<select name="" id="" class="xa-ownerRegionalId">
+											<option>请选择区服</option>
+											{% for regional in regionals %}
+											<option value="{{regional.id}}">{{regional.name}}</option>
+											{% endfor %}
+										</select>
+									</div>
+								</div>
+							</div>
+						</div>
+									
+									
+						<!-- <div class="form-group">
+							<label for="inputEmail3" class="col-sm-3 control-label">创建时间</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control xa-creatTime" value="{{normalcompany.creatTime}}" placeholder="">
+							</div>
+						</div>
+								 -->	
+						<div   class="form-group ">
+			                <label for="logo_image" class="col-sm-3 control-label">可选时间：</label>
+			                <div class="col-sm-8">
+			                    <div class="form-inline">
+						  			
+									<div class="xa-timepoints">
+										<div  class="form-group mr30">
+											<label>时</label>
+											<input type="number" class="form-control xa-timePoint-hour w80" data-validate="require-notempty"  >
+											<div class="errorHint"></div>
+										</div>
+										<div  class="form-group mr30">
+											<label>分</label>
+											<input type="number" class="form-control xa-timePoint-minues w80" data-validate="require-notempty" >
+											<div class="errorHint"></div>
+										</div>
+										<button type="button" class="btn btn-danger glyphicon glyphicon-remove xa-remove-point xui-hide" style="border-radius: 15px;padding: 0 3px;"></button>
+									</div>
+						  			
+									<span class="glyphicon glyphicon-plus btn btn-primary xa-addPoint">添加</span>
+								</div>
+			                </div>
+			            </div>
+									
+						<div class="form-group">
+							<label for="inputEmail3" class="col-sm-3 control-label">模式</label>
+							<div class="col-sm-8">
+								<div class="xa-modes">
+									<input type="text" class="form-control xa-mode mt5" value="{{normalcompany.mode}}" placeholder="">
+										<button type="button" class="btn btn-danger glyphicon glyphicon-remove xa-remove-mode xui-hide" style="border-radius: 15px;padding: 0 3px;"></button>
+								</div>
+									<span class="glyphicon glyphicon-plus btn btn-primary xa-addmode">添加</span>
+							</div>
+
+						</div>
+						<div class="form-group">
+							<label for="inputEmail3" class="col-sm-3 control-label">价格</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control xa-price" value="{{normalcompany.price}}" placeholder="">
+							</div>
+						</div>
+									
+						<div class="form-group">
+							<label for="inputEmail3" class="col-sm-3 control-label">备注</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control xa-remark" value="{{normalcompany.remark}}" placeholder="">
+							</div>
+						</div>
+									
+						<div class="form-group">
+							<label for="inputEmail3" class="col-sm-3 control-label">协议</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control xa-protocol" value="{{normalcompany.protocol}}" placeholder="">
+							</div>
+						</div>
+					
+					<div class="form-group">
+						<span class="btn btn-success mt20 mb30 xa-submit" data-id={{normalcompany.id}}>新建</span>
+					</div>
+				</div>
+	{% endblock %}
+	
+	{% block js %}
+	<script type="text/javascript">
+	
+	    $(document).ready(function() {
+
+			//start 绑定添加和删除游戏时间 
+	    	var showRemoveBtnFun = function(){    		
+				var $carts = $('.xa-timepoints');
+				if ($carts.length > 1) {
+					$('.xa-remove-point').show();
+				} else {
+					$('.xa-remove-point').hide();
+				}
+			};
+			showRemoveBtnFun();
+
+			$(document).delegate(".xa-addPoint ","click",function(){
+				$(this).prev().after($(this).prev().clone());
+				showRemoveBtnFun();
+			});
+
+			$(document).delegate(".xa-remove-point", "click", function(event){
+				var $div = $(event.currentTarget).parents('.xa-timepoints');
+				$div.remove();
+				showRemoveBtnFun();
+			});
+			// end
+
+
+			//start 绑定添加和删除游戏模式
+			var showRemoveModeBtnFun = function(){    		
+				var $mode = $('.xa-modes');
+				if ($mode.length > 1) {
+					$('.xa-remove-mode').show();
+				} else {
+					$('.xa-remove-mode').hide();
+				}
+			};
+			showRemoveModeBtnFun();
+
+			$(document).delegate(".xa-addmode ","click",function(){
+				$(this).prev().after($(this).prev().clone());
+				showRemoveModeBtnFun();
+			});
+
+			$(document).delegate(".xa-remove-mode", "click", function(event){
+				var $div = $(event.currentTarget).parents('.xa-modes');
+				$div.remove();
+				showRemoveModeBtnFun();
+			});
+			// end
+		
+			$(document).delegate(".xa-submit","click",function(){
+
+				var timePoints = [];
+				$(".xa-timepoints").each(function() {
+					console.log(11);
+					var timepoint = {};
+					timepoint.x = $(this).find('.xa-timePoint-hour').val();
+					timepoint.y = $(this).find('.xa-timePoint-minues').val();
+					
+					// if(charpoint.x < charpoint.y){
+					// 	error = true;
+					// 	return error
+					// }
+		    		timePoints.push(timepoint);
+				});
+
+
+				var modes = [];
+				$(".xa-modes").each(function() {
+					console.log(11);
+					var mode  = $(this).find('.xa-mode').val();
+					
+		    		modes.push(mode);
+				});
+
+				var data = {};
+				data.timePoints = JSON.stringify(timePoints);
+				data.modes = JSON.stringify(modes);
+				data.ownerRegionalId = $(".xa-ownerRegionalId").val();
+				data.price = $(".xa-price").val();
+				data.remark = $(".xa-remark").val();
+				data.protocol = $(".xa-protocol").val();
+				data.normalcompanyid = $(this).attr('data-id');
+				console.log(data);
+				W.Resource.put({
+					resource: 'normalcompany.normalcompany',
+					data: data,
+					success: function(data) {
+						W.showHint('success', '成功，重新加载页面...');
+						_.delay(function() {
+						    window.location.reload();
+						}, 1000);
+					},
+					error: function() {
+					W.showHint('error', '更新失败！');
+	        		}
+				})		
+	            
+			})
+	    });
+	</script>
+	{% endblock %}
+	

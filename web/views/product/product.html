@@ -17,7 +17,7 @@
 				</ul>
 			</div>
 			<div class="xui-i-right">
-				<div class="xui-i-content xui-shadow">
+				<div class="xui-i-content ">
 					<div id="newproduct"></div>
 				</div>
 			</div>
@@ -28,12 +28,12 @@
 
 	{% block js %}
 	<script type="text/babel">
-		var regionals = {{JSON.stringify(regionals)}};
+		var data = {{JSON.stringify(data)}};
 		var userid = '{{user.id}}'
 		console.log(userid);
 		console.log('----------------');
 		ReactDOM.render(
-			<Newproduct regionals={regionals} userid={userid}/>,
+			<Newproduct data={data} userid={userid}/>,
 			document.getElementById("newproduct")
    		)
    		

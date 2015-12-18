@@ -34,12 +34,22 @@ router.get('/', function(req, res, next) {
 				
 				return data;
 			});
+			models.product.findOne().sort({_id:-1}).exec(function(err, product) {
+				if (err) {
+					return next(err);
+				}
+				var data = {}
+				data.regionals = regionals;
+				data.product = product;
+				console.log(data+'=============')
+				var c = RequestContext(req, {
+					data : data,
+				});
 
-			var c = RequestContext(req, {
-				regionals : regionals,
+				res.render('product/product.html',c)
+
 			});
 
-			res.render('product/product.html',c)
 		});
 }.require(precondition.login_required));
 
