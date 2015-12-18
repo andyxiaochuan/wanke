@@ -1,0 +1,133 @@
+{% extends "../content_base.html" %}
+	{% block header_navs %}
+	    <li {% if first_nav_name == 'project' %}class="active"{% endif %}><a href="/userCenter/userCenter/">个人中心</a></li>
+	{% endblock %}
+	{% block content-panel %}
+	
+	<div class="xui-userCenterPage">
+	
+		<div class="xui-wrap">
+			<div class="xui-i-left xui-shadow">
+				<ul>
+					<li><a href="/userCenter/userCenter">我的主页</a></li>
+					<li><a href="/product/product" class="active">发布订单</a></li>
+					<li><a href="/product/products">已购订单</a></li>
+					<li><a href="">账号设置</a></li>
+					<li><a href="">账户充值</a></li>
+					<li><a href="">我的积分</a></li>
+				</ul>
+			</div>
+			<div class="xui-i-right">
+				<div class="xui-i-content xui-shadow">
+					{% for user in userList %}
+					<div>
+						<div class="xui-userHeader" style="background-image:url(/static/img/user/{{user.name}}.jpg)"></div>
+						<div class="xui-userInfo fl">
+							<div>
+								{{user.name}} 
+							</div>
+							<div >
+								<div class="fl">资料完成程度:60%</div>
+								<div class="progress w200 fl">
+									<div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+									</div>
+								</div>
+								
+								<a href="" class="m10">完善资料</a>
+	
+							</div>
+							<div class="cb">
+								账户余额
+							</div>
+							<div>
+								你不是会员 <a href="" class="ml20">加入会员</a>
+							</div>
+						</div>
+						<div class="fl pl30">
+							<div>
+								我的积分：<span class="xui-color-orange font16 fb">50</span>
+							</div>
+							<div>
+								<a href="">如何获取积分</a>
+							</div>
+							
+						</div>
+					</div>
+					{% endfor %}
+					<a class="glyphicon glyphicon-plus btn btn-primary" href="/product/product/">Add product </a>
+					<table class="table table-bordered table-striped mt10 ">
+						<thead>
+							<tr>
+								<th>ownerUserId</th>
+								<th>ownerRegional</th>
+								<th>price</th>
+								<th>creatTime</th>
+								<th>gameTime</th>
+								<th>remake</th>
+								<th>mode</th>
+								<th>protocol</th>
+								<th>legal</th>
+							
+							</tr>
+						</thead>
+							<tbody>
+							{% for product in products %}
+							<tr>
+
+								<td>
+									<div data-id={{product.ownerUserId}} class="xui-userHeader" style="background-image:url(/static/img/user/{{ product.owner.name }}.jpg)"></div>
+								</td>
+								<td>{{product.ownerRegional}}</td>
+								<td>{{product.price}}</td>
+								<td>{{product.creatTime|date('Y-m-d-h-i', -480, 'CCT')}}</td>
+								<td>{{product.gameTime|date('Y-m-d', -480, 'CCT')}}</td>
+								<td>{{product.remark}}</td>
+								<td>{{product.mode}}</td>
+								<td>{{product.protocol}}</td>
+								<td>{{product.legal}}</td>
+							</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+
+
+				</div>
+				<div class="xui-i-content xui-shadow">
+					
+				</div>
+			</div>
+		</div>
+				
+		
+		
+	</div>
+	{% endblock %}
+	
+	{% block js %}
+	<script type="text/javascript">
+	
+	    $(document).ready(function() {
+	
+			$(document).delegate(".xa-delete","click",function(){
+				var product_id = $(this).attr("data-id");
+				W.Resource.delete({
+	                    resource: 'project.product',
+	                    data: {
+	                        product_id: product_id
+	                    },
+	                    success: function(data) {
+	                        W.showHint('success', '删除成功');
+	                        _.delay(function() {
+	                            window.location.reload();
+	                        }, 1000);
+	                    },
+	                    error: function() {
+	                        W.showHint('error', '删除失败！');
+	                    }
+	            });
+			});
+	    	
+	    });
+	</script>
+	{% endblock %}
+	

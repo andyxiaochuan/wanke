@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html {% block html_css %}{% endblock %}>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+    	<meta name="apple-mobile-web-app-capable" content="yes" />
+		<title>Guppy——“互联网+”品牌中心</title>
+		<link rel="shortcut icon" href="/favicon.ico" />
+
+		<link type="text/css" rel="stylesheet" media="all" href="/static/css/base.css">
+		<link type="text/css" rel="stylesheet" media="all" href="/static/css/common.css">
+		<link type="text/css" rel="stylesheet" media="all" href="/static/lib/swiper2/idangerous.swiper.css">
+		<!-- <link type="text/css" rel="stylesheet" media="all" href="/static/lib/swiper3/swiper.min.css"> -->
+		<link type="text/css" rel="stylesheet" media="all" href="/static/css/mobile.css">
+		<link type="text/css" rel="stylesheet" media="all" href="/static/lib/font-awesome-4.4.0/css/font-awesome.min.css">
+
+	</head>
+	<body>
+		{% block content %}{% endblock %}
+
+		<!-- 3rd party lib -->
+		<script type="text/javascript" src="/static/lib/jquery/jquery-1.11.2.min.js"></script>
+		<script type="text/javascript" src="/static/lib/jquery/jquery-ui-1.10.3/jquery-ui-1.10.3.custom.min.js"></script>
+		<script type="text/javascript" src="/static/lib/swig-1.4.2.js"></script>
+		<script type="text/javascript" src="/static/lib/bootstrap-3.3.4/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="/static/lib/underscore-1.7.0.min.js"></script>
+		<script type="text/javascript" src="/static/lib/backbone-1.1.2.js"></script>
+		<script type="text/javascript" src="/static/lib/spin-1.3.js"></script>
+		<script type="text/javascript" src="/static/lib/Hide-Address_bar.js"></script>
+		<script type="text/javascript" src="/static/lib/zepto/zepto.js"></script>
+		<!-- // <script type="text/javascript" src="/static/lib/zepto/gmu-2.1.1.js"></script> -->
+		// <script type="text/javascript" src="/static/lib/swiper2/idangerous.swiper.min.js"></script>
+		<!-- // <script type="text/javascript" src="/static/lib/swiper3/swiper.min.js"></script> -->
+		<!-- // <script type="text/javascript" src="/static/lib/echarts-2.2.3/echarts-all.js"></script> -->
+		<script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
+
+		<!-- core lib -->
+		<script type="text/javascript" src="/static/js/system/system.js"></script>
+		<script type="text/javascript" src="/static/js/system/resource.js"></script>
+		<script type="text/javascript" src="/static/js/system/api.js"></script>
+		<script type="text/javascript" src="/static/js/system/loading.js"></script>
+		<script type="text/javascript" src="/static/js/system/dialog.js"></script>
+		<script type="text/javascript" src="/static/js/system/view.js"></script>
+		<script type="text/javascript" src="/static/js/system/global_hook.js"></script>
+		<script type="text/javascript" src="/static/js/system/validate.js"></script>
+		<script type="text/javascript" src="/static/js/system/swig_filters.js"></script>
+		<script type="text/javascript" src="/static/js/system/debug.js"></script>
+
+		{{ client_views|safe }}
+
+		{{ client_dialogs|safe }}
+
+
+		{% block base_js %}
+ 			{% block js %}{% endblock %}
+		{% endblock %}
+	
+	</body>
+</html>

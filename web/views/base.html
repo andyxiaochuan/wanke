@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html {% block html_css %}{% endblock %}>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>rank</title>
+		<link rel="shortcut icon" href="/favicon.ico" />
+
+		<link type="text/css" rel="stylesheet" media="all" href="/static/lib/bootstrap-3.3.4/css/bootstrap.min.css">
+		<link type="text/css" rel="stylesheet" media="all" href="/static/lib/bootstrap-3.3.4/css/bootstrap-slider.css">
+		<link type="text/css" rel="stylesheet" media="all" href="/static/lib/jquery/jquery-ui-1.10.3/css/redmond/jquery-ui-1.10.3.custom.css">
+		<link type="text/css" rel="stylesheet" media="all" href="/static/css/base.css">
+		<link type="text/css" rel="stylesheet" media="all" href="/static/css/common.css">
+		<link type="text/css" rel="stylesheet" media="all" href="/static/css/codehouse.css">
+		<link type="text/css" rel="stylesheet" media="all" href="/static/css/dialog.css">
+		<link type="text/css" rel="stylesheet" media="all" href="/static/lib/font-awesome-4.4.0/css/font-awesome.min.css">
+
+		<link type="text/css" rel="stylesheet" href="/static/lib/codemirror-5.7/lib/codemirror.css">
+		<link type="text/css" rel="stylesheet" href="/static/lib/codemirror-5.7/theme/monokai.css">
+		<link type="text/css" rel="stylesheet" href="/static/lib/codemirror-5.7/addon/scroll/simplescrollbars.css">
+		<!-- 图片上传 -->
+		<link type="text/css" rel="stylesheet" media="all" href="/static/lib/uploadify/uploadify-3.2.css">
+	</head>
+	<body>
+		{% block content %}{% endblock %}
+
+		<!-- 3rd party lib -->
+		<script type="text/javascript" src="/static/lib/jquery/jquery-1.11.2.min.js"></script>
+		<script type="text/javascript" src="/static/lib/jquery/jquery-ui-1.10.3/jquery-ui-1.10.3.custom.min.js"></script>
+		<script type="text/javascript" src="/static/lib/swig-1.4.2.js"></script>
+		<script type="text/javascript" src="/static/lib/bootstrap-3.3.4/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="/static/lib/underscore-1.7.0.min.js"></script>
+		<script type="text/javascript" src="/static/lib/backbone-1.1.2.js"></script>
+		<script type="text/javascript" src="/static/lib/spin-1.3.js"></script>
+
+		<!-- core lib -->
+		<script type="text/javascript" src="/static/js/system/system.js"></script>
+		<script type="text/javascript" src="/static/js/system/resource.js"></script>
+		<script type="text/javascript" src="/static/js/system/api.js"></script>
+		<script type="text/javascript" src="/static/js/system/loading.js"></script>
+		<script type="text/javascript" src="/static/js/system/dialog.js"></script>
+		<script type="text/javascript" src="/static/js/system/view.js"></script>
+		<script type="text/javascript" src="/static/js/system/global_hook.js"></script>
+		<script type="text/javascript" src="/static/js/system/validate.js"></script>
+		<script type="text/javascript" src="/static/js/system/swig_filters.js"></script>
+		<script type="text/javascript" src="/static/js/system/debug.js"></script>
+
+		<!-- code mirror -->
+		<script type="text/javascript" src="/static/lib/codemirror-5.7/lib/codemirror.js"></script>
+		<script type="text/javascript" src="/static/lib/codemirror-5.7/mode/javascript/javascript.js"></script>
+		<script type="text/javascript" src="/static/lib/codemirror-5.7/mode/css/css.js"></script>
+		<script type="text/javascript" src="/static/lib/codemirror-5.7/mode/xml/xml.js"></script>
+		<script type="text/javascript" src="/static/lib/codemirror-5.7/mode/htmlmixed/htmlmixed.js"></script>
+		<script type="text/javascript" src="/static/lib/codemirror-5.7/addon/scroll/simplescrollbars.js"></script>
+		
+		<!-- 图片上传 -->
+		<script type="text/javascript" src="/static/lib/uploadify/jquery.uploadify-3.2.min.js"></script>
+
+
+		<script type="text/javascript" src="/static/lib/react/react-0.14.3.js"></script>
+		<script type="text/javascript" src="/static/lib/react/react-dom-0.14.3.js"></script>
+		<script type="text/javascript" src="/static/lib/react/babel-browser-5.8.23.min.js"></script>
+
+
+		<!-- react component -->
+		<script type="text/babel" src="/static/js/component/calendar.js"></script>
+		<script type="text/babel" src="/static/js/component/newproduct.js"></script>
+
+		{{ client_views|safe }}
+
+		{{ client_dialogs|safe }}
+
+
+		{% block base_js %}{% endblock %}
+	</body>
+</html>

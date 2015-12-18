@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html style="background-color:#EDEDED;">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>玩客 —— rank</title>
+	    <link type="text/css" rel="stylesheet" media="all" href="/static/css/base.css">
+	    <link type="text/css" rel="stylesheet" media="all" href="/static/lib/bootstrap-3.3.4/css/bootstrap.min.css">
+	    <link type="text/css" rel="stylesheet" media="all" href="/static/css/login.css">
+    </head>
+    <body class="xui-registerPage">
+    	<form method="post" action="/account/register/?_method=put" class="xui-registerPage-form">
+    		<h1 class="xui-i-logo tc">Guppy</h1>
+    		<div class="form-group mt40">
+    			<input name="username" type="text" class="form-control" placeholder="用户名" />
+    		</div>
+    		<div class="form-group">
+    			<input name="password" type="password" class="form-control" placeholder="密码" />
+    		</div>
+    		<div class="form-group">
+    			<input type="submit" class="btn btn-success form-control" value="注册" />
+    		</div>
+    	</form>
+        
+        <script type="text/javascript" src="/static/lib/jquery/jquery-1.11.2.min.js"></script>
+        <script type="text/javascript">
+	        $(document).ready(function() {
+		       $('[name="username"]').focus();
+	        });
+        </script>
+	</body>
+</html>

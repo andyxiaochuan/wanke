@@ -1,0 +1,42 @@
+{% extends "../content_base.html" %}
+	{% block header_navs %}
+	    <li {% if first_nav_name == 'project' %}class="active"{% endif %}><a href="/userCenter/userCenter/">个人中心</a></li>
+	{% endblock %}
+	{% block content-panel %}
+	
+	<div class="xui-userCenterPage">
+		<div class="xui-wrap">
+			<div class="xui-i-left xui-shadow">
+				<ul>
+					<li><a href="/userCenter/userCenter">我的主页</a></li>
+					<li><a href="/product/product" class="active">发布订单</a></li>
+					<li><a href="/product/products">已购订单</a></li>
+					<li><a href="">账号设置</a></li>
+					<li><a href="">账户充值</a></li>
+					<li><a href="">我的积分</a></li>
+				</ul>
+			</div>
+			<div class="xui-i-right">
+				<div class="xui-i-content xui-shadow">
+					<div id="newproduct"></div>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+	{% endblock %}
+
+	{% block js %}
+	<script type="text/babel">
+		var regionals = {{JSON.stringify(regionals)}};
+		var userid = '{{user.id}}'
+		console.log(userid);
+		console.log('----------------');
+		ReactDOM.render(
+			<Newproduct regionals={regionals} userid={userid}/>,
+			document.getElementById("newproduct")
+   		)
+   		
+	</script>
+	{% endblock %}
+	

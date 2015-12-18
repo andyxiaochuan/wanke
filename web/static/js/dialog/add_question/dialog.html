@@ -1,0 +1,56 @@
+<script id="system-add-question-dialog-tmpl-src" type="text/x-swig-tmpl">
+	<div class="modal fade" id="system-add-project-dialog">
+	<div class="modal-dialog xui-feedbackPage">
+	<div class="modal-content">
+		<div class="modal-header">
+			<button aria-hidden="true" data-dismiss="modal" class="close" type="button"><span aria-hidden="true">&times;</span></button>
+			<h3 class="modal-title">问题反馈</h3>
+		</div>
+
+		<div class="modal-body">
+			<div class="form-group pl20 pr20">
+				<div>
+					<label >是否解决</label>
+					<input class="xa-status" type="checkbox" value="">
+					
+				</div>
+			</div>
+			<div class="form-group pl20 pr20">
+			    <div>
+					<label >提出者：</label>
+					<input type="text" class="form-control xa-feedMan" maxlength=12  data-validate="require-notempty">
+					<div class="errorHint"></div>
+				</div>
+			</div>
+			<div class="form-group pl20 pr20">
+				<div>
+					<label >反馈时间：</label>
+					<input type="date" class="form-control xa-subtime"  data-validate="require-notempty">
+					<div class="errorHint"></div>
+				</div>
+			</div>
+			<div class="form-group pl20 pr20">
+				<div>
+					<label >意见概况：</label>
+					<input type="text" class="form-control xa-survey" data-validate="require-notempty" maxlength=20>
+					<div class="errorHint"></div>
+				</div>
+			</div>
+			<div class="form-group pl20 pr20">
+				<div>
+					<label>意见原文：</label>
+					<textarea type="text" class="form-control xa-content" data-validate="require-notempty" rows="6" maxlength=100>
+					</textarea>
+					<div class="errorHint"></div>
+				</div>
+			</div>
+			
+		</div>
+
+		<div class="modal-footer">
+			<button class="btn btn-success xa-submit-dialog" id="change_password">完成</button>
+		</div>
+	</div>
+	</div>
+	</div>
+</script>

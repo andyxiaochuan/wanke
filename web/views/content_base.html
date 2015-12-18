@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div id="spin-wrapper"><div id="spin"></div><div id="spin-hint" class="ml10"></div></div>
+
+{% if not no_header %}
+<div id="header" class="wui-header">
+    <div class="wui-wrap">
+        <div>
+            <a class="navbar-brand" href="/">玩客rank</a>
+        </div>
+
+        <ul class="nav navbar-nav">
+            <li {% if first_nav_name == 'project' %}class="active"{% endif %}><a href="/project/projects/">首页</a></li>
+            <li {% if first_nav_name == 'project' %}class="active"{% endif %}><a href="/project/projects/">高手区</a></li>
+            <li {% if first_nav_name == 'project' %}class="active"{% endif %}><a href="/project/projects/">新闻区</a></li>
+            {% block header_navs %}
+           
+            {% endblock %}
+        </ul>
+
+        <div class="collapse navbar-collapse" id="">
+            {% if not custom_header_nav %}
+            <div class="btn-group navbar-form navbar-right">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    <span class="glyphicon glyphicon-user"></span> {% if user.real_name %}{{user.real_name}}{% else %}{{user.name}}{% endif %} <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="/account/logout/">退出</a></li>
+                </ul>
+            </div>
+            {% endif %}
+
+           
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<div id="main-panel">
+    <div class="xui-contentPanel">
+      <!-- 内容 start -->
+      {% block content-panel %}{% endblock %}
+      <!-- 内容 end -->
+    </div>
+</div>
+{% endblock %}
+
+{% block base_js %}
+    <div id="jsons" style="display: none;">
+        {% for inner_json_name, inner_json_content in jsons.items %}
+        <div id="__json-{{inner_json_name}}">
+            {{inner_json_content|safe}}
+        </div>
+        {% endfor %}
+    </div>
+
+    <script type="text/javascript">
+        W.uid = "{{ req.user.id }}";
+        W.API_VERSION = 1;
+    </script>
+    {% block js %}{% endblock %}
+ {% endblock %}

@@ -1,0 +1,132 @@
+{% extends "../content_base.html" %}
+{% block header_navs %}
+    <li {% if first_nav_name == 'project' %}class="active"{% endif %}><a href="/userCenter/userCenter">个人中心</a></li>
+{% endblock %}
+{% block content-panel %}
+
+<div class="xui-userCenterPage">
+
+	<div class="xui-wrap">
+		<div class="xui-i-left xui-shadow">
+			
+			<ul>
+				<li><a href="/userCenter/userCenter" class="active">我的主页</a></li>
+				<li><a href="/product/product" >发布订单</a></li>
+				<li><a href="/product/products" >已购订单</a></li>
+				<li><a href="">账号设置</a></li>
+				<li><a href="">账户充值</a></li>
+				<li><a href="">我的积分</a></li>
+			</ul>
+			
+		</div>
+		<div class="xui-i-right">
+			<div class="xui-i-content xui-shadow">
+				{% for user in userList %}
+				<div>
+					<div class="xui-userHeader" style="background-image:url(/static/img/user/{{user.name}}.jpg)"></div>
+					<div class="xui-userInfo fl">
+						<div>
+							{{user.name}} 
+						</div>
+						<div >
+							<div class="fl">资料完成程度:60%</div>
+							<div class="progress w200 fl">
+								<div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+								</div>
+							</div>
+							
+							<a href="" class="m10">完善资料</a>
+
+						</div>
+						<div class="cb">
+							账户余额
+						</div>
+						<div>
+							你不是会员 <a href="" class="ml20">加入会员</a>
+						</div>
+					</div>
+					<div class="fl pl30">
+						<div>
+							我的积分：<span class="xui-color-orange font16 fb">50</span>
+						</div>
+						<div>
+							<a href="">如何获取积分</a>
+						</div>
+						
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+			<div class="xui-i-content xui-shadow">
+				
+			</div>
+		</div>
+	</div>
+			
+	
+	<div id="cal"></div>
+</div>
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('.xa-action').click(function(event) {
+			event.stopPropagation();
+			event.preventDefault();
+			console.log('click action');
+		})
+
+		$('.xa-action').on('touchstart', function(event) {
+			event.stopPropagation();
+			event.preventDefault();
+			var $link = $(event.currentTarget);
+			$link.addClass('xui-i-active');
+		});
+
+		$('.xa-action').on('touchend', function(event) {
+			event.stopPropagation();
+			event.preventDefault();
+			var $link = $(event.currentTarget);
+			$link.removeClass('xui-i-active');
+		});
+
+		$('.xa-add').click(function(event) {
+			var firendid=$(this).attr('data-firendid');
+			var real_userid=$('.xa-real_user').attr('data-userid');
+			if (real_userid.length === 0||firendid.length===0) {
+				alert('内容不能为空!');
+			} else {
+				W.Resource.put({
+					app: 'friends',
+					resource: 'friends',
+					data: {
+						userid: real_userid,
+						friendid: firendid
+					},
+					success: function(data) {
+						alert('添加好友成功')
+					},
+					error: function(resp, err) {
+						alert('发送微博失败!');
+					}
+				})
+			}
+			
+		});
+		$('.xa-serch').on('touchend', function(event) {
+			alert('dddd');
+		});
+		
+
+		
+	});
+</script>
+
+<script type="text/jsx">
+		ReactDOM.render(
+			<calendar />,
+			document.getElementById("cal"),
+   		)
+	</script>
+{% endblock %}
