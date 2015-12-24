@@ -28,23 +28,32 @@
 										<span class="xa-state" data-state="0">已付款</span> 
 									{% else %}
 										{% if order.state == 1 %} 
-											<span class="xa-state" data-state="1">退款中</span>
+											<span class="xa-state" data-state="1">退单中</span>
 										{% else %} 
-											<span class="xa-state" data-state="2">已完成</span>
+											{% if order.state == 2 %} 
+												<span class="xa-state" data-state="2">已完成</span>
+											{% else %} 
+												<span class="xa-state" data-state="3">退单成功</span>
+											{% endif %} 
 										{% endif %} 
 									{% endif %}
 								</td>
 								<td> 
-										{% if order.state == 0 %} 
-											<span class="btn btn-primary xa-changeState" data-id={{order.id}}>退单</span>
-										{% else %}
-											{% if order.state == 1 %} 
-												<span class="btn btn-primary xa-changeState" data-id={{order.id}}>取消退单</span>
+									------{{order.ifEvaluated}}-------
+									{% if order.state == 0 %} 
+										<span class="btn btn-primary xa-changeState" data-id={{order.id}} data-action=1>确认完成</span>
+										<span class="btn btn-primary xa-changeState" data-id={{order.id}} data-action=2>退单</span>
+									{% else %}
+										{% if order.state == 1 %} 
+											<span class="btn btn-primary xa-changeState" data-id={{order.id}}>取消退单</span>
+										{% else %} 
+											{% if order.state == 2 %} 
+												<a href="/evaluate/evaluate/?order_id={{order.id}}&coachId={{order.seller.id}}">去评价</a>
 											{% else %} 
-												<a href="">去评价</a>
-											{% endif %} 
-										{% endif %}
-									
+												<span >已退单</span>
+											{% endif %}
+										{% endif %} 
+									{% endif %}
 								</td>
 							</tr>
 							{% endfor %}
@@ -58,13 +67,19 @@
 	<script type="text/javascript">
 	
 	    $(document).ready(function() {
-	
+		
 			$(document).delegate(".xa-changeState","click",function(){
 				var data = {};
 				var state = parseInt($(this).parent().parent().find(".xa-state").first().attr("data-state"));
-				//data.order_id 
+				data.order_id = $(this).attr("data-id");
+				console.log(data);
 				if(state == 0){
-					data.state = 1;
+					if($(this).attr("data-action")==1){
+						data.state = 2;
+					}
+					else{
+						data.state = 1;
+					}
 				}
 				else{
 					if(state == 1 )

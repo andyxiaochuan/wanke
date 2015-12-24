@@ -1,0 +1,142 @@
+{% extends "../userCenter_content_base.html" %}
+		{% block header_navs %}
+		    <li {% if first_nav_name == 'project' %}class="active"{% endif %}><a href="/userCenter/userCenter/">个人中心</a></li>
+		{% endblock %}
+		{% block content-panel %}
+				<div class="xui-i-content">
+									
+						
+				<div class="xui-star-heighLight" style="background-image:url(/static/img/bk/iconbk.png)"></div>
+				
+				<div class="xui-star-grayLight" style="background-image:url(/static/img/bk/iconbk.png)"></div>
+
+				<div class="form-group pt100">
+					<div style="line-height:50px;">大神实力</div>
+					
+					<input id="ex1" type="text" data-slider-min="0" data-slider-max="100" data-slider-step="5" data-slider-value="50"/&t
+					<span id="ex6CurrentSliderValLabel"><span class="ml15" id="ex1SliderVal">50</span>分</span>
+			
+					<div style="line-height:50px;">教学互动</div>
+					<input id="ex2" type="text" data-slider-min="0" data-slider-max="100" data-slider-step="5" data-slider-value="50"/&t
+					<span id="ex6CurrentSliderValLabel"><span class="ml15" id="ex2SliderVal">50</span>分</span>
+				
+				
+					<div style="line-height:50px;">服务态度</div>
+					<input id="ex3" type="text" data-slider-min="0" data-slider-max="100" data-slider-step="5" data-slider-value="50"/&t
+					<span id="ex6CurrentSliderValLabel"><span class="ml15" id="ex3SliderVal">50</span>分</span>
+					
+				
+					<div style="line-height:50px;">满意程度</div>
+					<input id="ex4" type="text" data-slider-min="0" data-slider-max="100" data-slider-step="5" data-slider-value="50"/&t
+					<span id="ex6CurrentSliderValLabel"><span class="ml15" id="ex4SliderVal">50</span>分</span>
+
+					<div style="line-height:50px;">综合评价</div>
+					<input id="ex5" type="text" data-slider-min="0" data-slider-max="5" data-slider-step="1" data-slider-value="5"/&t
+					<span id="ex6CurrentSliderValLabel"><span class="ml15" id="ex5SliderVal">5</span>星</span>
+
+				
+				</div>
+				<div>评论内容 </div>
+				<textarea name="" id="ex6" cols="80" rows="12"></textarea>
+					
+				<div class="form-group">
+					<span class="btn btn-success mt20 mb30 xa-submit" data-coachId={{coachId}}  data-orderId={{orderId}}>发表评论</span>
+				</div>
+
+				</div>
+
+
+	{% endblock %}
+	
+	{% block js %}
+	<script type="text/javascript">
+		function GetUrlRelativePath(){
+	　　　　var url = document.referrer;
+			if(url){
+		　　　　var arrUrl = url.split("//");
+
+		　　　　var start = arrUrl[1].indexOf("/");
+		　　　　var relUrl = arrUrl[1].substring(start);//stop省略，截取从start开始到结尾的所有字符
+
+		　　　　if(relUrl.indexOf("?") != -1){
+		　　　　　　relUrl = relUrl.split("?")[0];
+		　　　　}
+		　　　　return relUrl;
+			}
+			else{
+				return '';
+			}
+	　　}
+
+		if( GetUrlRelativePath() !="/order/orders")
+		{
+			window.location.href="/coach/coachs"
+		}
+	    $(document).ready(function() {
+	    	//  var backurl=document.referrer;
+	    	//   alert(backurl);
+      // alert(backurl.indexOf('/'));
+
+
+
+			$("#ex1").slider();
+			$("#ex1").on("slide", function(slideEvt) {
+				$("#ex1SliderVal").text(slideEvt.value);
+			});
+
+			$("#ex2").slider();
+			$("#ex2").on("slide", function(slideEvt) {
+				$("#ex2SliderVal").text(slideEvt.value);
+			});
+
+			$("#ex3").slider();
+			$("#ex3").on("slide", function(slideEvt) {
+				$("#ex3SliderVal").text(slideEvt.value);
+			});
+
+			$("#ex4").slider();
+			$("#ex4").on("slide", function(slideEvt) {
+				$("#ex4SliderVal").text(slideEvt.value);
+			});
+
+			$("#ex5").slider();
+			$("#ex5").on("slide", function(slideEvt) {
+				$("#ex5SliderVal").text(slideEvt.value);
+			});
+
+			
+	
+			$(document).delegate(".xa-submit","click",function(){
+				var data = {};
+				var content = {};
+				content.a = $("#ex1").val();
+				content.b = $("#ex2").val();
+				content.c = $("#ex3").val();
+				content.d = $("#ex4").val();
+				content.e = $("#ex5").val();
+				content.f = $("#ex6").val();
+				data.content = JSON.stringify(content);
+				data.coachId = $(this).attr("data-coachId")
+				data.orderId = $(this).attr("data-orderId")
+
+				
+				console.log(data);
+				W.Resource.put({
+					resource: 'evaluate.evaluate',
+					data: data,
+					success: function(data) {
+						W.showHint('success', '成功，重新加载页面...');
+						_.delay(function() {
+						    window.history.back();
+						}, 1000);
+					},
+					error: function() {
+					W.showHint('error', '更新失败！');
+	        		}
+				})		
+	            
+			})
+	    });
+	</script>
+	{% endblock %}
+	

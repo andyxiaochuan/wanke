@@ -23,9 +23,35 @@
 								<td>{{order.price}}</td>
 								<td>{{order.gameTime|date('Y-m-d-h-i', -480, 'CCT')}}</td>
 								<td>{{order.creatTime|date('Y-m-d-h-i', -480, 'CCT')}}</td>
-								<td>{{order.state}}</td>
+								<td>
+									{% if order.state == 0 %} 
+										<span class="xa-state" data-state="0">已付款</span> 
+									{% else %}
+										{% if order.state == 1 %} 
+											<span class="xa-state" data-state="1">退单中</span>
+										{% else %} 
+											{% if order.state == 2 %} 
+												<span class="xa-state" data-state="2">已完成</span>
+											{% else %} 
+												<span class="xa-state" data-state="3">退单成功</span>
+											{% endif %} 
+										{% endif %} 
+									{% endif %}
+								</td>
 								<td> 
-									<a class="btn btn-primary " href="/order/order/?order_id={{order.id}}"> 编辑</a>
+									{% if order.state == 0 %} 
+										
+									{% else %}
+										{% if order.state == 1 %} 
+											<span class="btn btn-primary xa-changeState" data-id={{order.id}}>同意退单</span>
+										{% else %} 
+											{% if order.state == 2 %} 
+												<a href="">去评价</a>
+											{% else %} 
+												<span >已退单</span>
+											{% endif %}
+										{% endif %} 
+									{% endif %}
 								</td>
 							</tr>
 							{% endfor %}
@@ -40,37 +66,28 @@
 	
 	    $(document).ready(function() {
 	
-			$(document).delegate(".xa-delete","click",function(){
-				var order_id = $(this).attr("data-id");
+			$(document).delegate(".xa-changeState","click",function(){
 				var data = {};
-				
-				data.buyerId = $(".xa-buyerId").val();
-				
-				data.sellerId = $(".xa-sellerId").val();
-				
-				data.price = $(".xa-price").val();
-				
-				data.gameTime = $(".xa-gameTime").val();
-				
-				data.creatTime = $(".xa-creatTime").val();
-				
-				data.state = $(".xa-state").val();
-				
-				W.Resource.delete({
-	                    resource: 'project.order',
-	                    data: {
-	                        order_id: order_id
-	                    },
+				var state = parseInt($(this).parent().parent().find(".xa-state").first().attr("data-state"));
+				data.order_id = $(this).attr("data-id");
+				console.log(data);
+				if(state == 1 )
+				{
+					data.state=3
+					W.Resource.post({
+	                    resource: 'order.refundorder',
+	                    data:data,
 	                    success: function(data) {
-	                        W.showHint('success', '删除成功');
+	                        W.showHint('success', '提交成功');
 	                        _.delay(function() {
 	                            window.location.reload();
 	                        }, 1000);
 	                    },
 	                    error: function() {
-	                        W.showHint('error', '删除失败！');
+	                        W.showHint('error', '提交失败！');
 	                    }
-	            });
+		            });
+				}
 			});
 	    	
 	    });

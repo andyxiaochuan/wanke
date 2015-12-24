@@ -1,0 +1,85 @@
+{% extends "../userCenter_content_base.html" %}
+		{% block header_navs %}
+		    <li {% if first_nav_name == 'project' %}class="active"{% endif %}><a href="/userCenter/userCenter/">个人中心</a></li>
+		{% endblock %}
+		{% block content-panel %}
+	<div class="xui-userCenterPage">
+				<div class="xui-i-content">
+					<a class="glyphicon glyphicon-plus btn btn-primary" href="/evaluate/evaluate/">Add evaluate </a>
+					<table class="table table-bordered table-striped mt10 ">
+						<thead>
+							<tr>
+								
+								<th>coachId</th>
+								
+								<th>orderId</th>
+								
+								<th>creatTime</th>
+								
+								<th>content</th>
+								
+								<th>操作</th>
+							</tr>
+						</thead>
+							<tbody>
+							{% for evaluate in evaluates %}
+							<tr>
+								
+								<td>{{evaluate.coachId}}</td>
+								
+								<td>{{evaluate.orderId}}</td>
+								
+								<td>{{evaluate.creatTime}}</td>
+								
+								<td>{{evaluate.content}}</td>
+								
+								<td> 
+									<a class="btn btn-primary " href="/evaluate/evaluate/?evaluate_id={{evaluate.id}}"> 编辑</a>
+									<a href="javascript:void(0);" class="btn btn-danger xa-delete" data-id={{evaluate.id}}>删除</a>  
+								</td>
+							</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+	</div>
+	{% endblock %}
+	
+	{% block js %}
+	<script type="text/javascript">
+	
+	    $(document).ready(function() {
+	
+			$(document).delegate(".xa-delete","click",function(){
+				var evaluate_id = $(this).attr("data-id");
+				var data = {};
+				
+				data.coachId = $(".xa-coachId").val();
+				
+				data.orderId = $(".xa-orderId").val();
+				
+				data.creatTime = $(".xa-creatTime").val();
+				
+				data.content = $(".xa-content").val();
+				
+				W.Resource.delete({
+	                    resource: 'project.evaluate',
+	                    data: {
+	                        evaluate_id: evaluate_id
+	                    },
+	                    success: function(data) {
+	                        W.showHint('success', '删除成功');
+	                        _.delay(function() {
+	                            window.location.reload();
+	                        }, 1000);
+	                    },
+	                    error: function() {
+	                        W.showHint('error', '删除失败！');
+	                    }
+	            });
+			});
+	    	
+	    });
+	</script>
+	{% endblock %}
+	

@@ -22,6 +22,7 @@ var settings = require('settings');
 
 var models = require('./models');
 var userModels = require('../account/models');
+var evaluateModels = require('../evaluate/models');
 
 
 router.get('/', function(req, res, next) {
@@ -41,11 +42,40 @@ router.get('/', function(req, res, next) {
 				}
 			})
 			.then(function(data){
-				var c = RequestContext(req, {
-					orders : data,
-					is_coach: req.user.is_coach,
-				});
-				res.render('order/orders.html',c)
+
+
+				evaluateModels.evaluate.find().sort({_id:-1}).exec(function(err, evaluates) {
+					var orders =  _.pluck(evaluates,"orderId");
+					console.log("orders",orders);
+					var datas = data.map(function(cell) {
+							console.log("xxxxxxxxxxxxxxxxxx",cell.id)
+							if(_.contains(orders, cell.id.toString())){
+								//cell = cell.toJSON();
+								cell.ifEvaluated = 1;
+								
+								console.log("rrrrrrrrrrrrr",cell.id);
+								
+								//cell = cell.toObject();
+							}
+							else{
+								//cell = cell.toJSON();
+								cell.ifEvaluated = 0;
+								console.log("ccccccccccc",cell.id);
+								
+								
+							}
+							return cell;
+					});
+					
+					
+					console.log(data);
+					var c = RequestContext(req, {
+						orders : datas,
+						is_coach: req.user.is_coach,
+					});
+					res.render('order/orders.html',c)
+				})
+
 			})
 			
 		});

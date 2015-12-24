@@ -196,6 +196,24 @@
   float: left;
 }
 
+.xui-star-heighLight{
+  width: 15px;
+  min-height: 15px;
+  margin-right: 20px;
+  float: left;
+  float: left;
+  background-position: 169px 190px;
+}
+
+.xui-star-grayLight{
+  width: 15px;
+  min-height: 15px;
+  margin-right: 20px;
+  float: left;
+  float: left;
+  background-position: 94px 190px;
+}
+
 .xui-wrap .xui-i-right .xui-userInfo {
 	/*font-family: "MyNewFont";*/
 	font-size: 16px;
@@ -230,4 +248,16 @@
   border: 1px solid #ccc;
   cursor: pointer;
   padding: 5px;
+}
+
+
+
+
+
+.slider-selection {
+  background-color: orange ;
+  background-image: none;
+}
+.slider-handle {
+  background-color: green;
 }

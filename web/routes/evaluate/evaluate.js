@@ -15,40 +15,37 @@ var path = require('path');
 
 var accountModels = require('routes/account/models');
 var precondition = require('lib/precondition');
-var _ = require('underscore');
 var dumpRequest = require('core/dump_request').dumpRequest;
 var RequestContext = require('core/request_context').RequestContext;
 var settings = require('settings');
 
 var models = require('./models');
-var userModels = require('../account/models');
 
 
 router.get('/', function(req, res, next) {
-	
-		models.order.find().sort({_id:-1}).exec(function(err, orders) {
-			if (err) {
-				return next(err);
-			}
+
 			var c = RequestContext(req, {
-				orders : orders,
 				is_coach: req.user.is_coach,
+				coachId: req.GET.coachId,
+				orderId : req.GET.order_id,
 			});
 
-			res.render('order/order.html', c)
-		});
+			res.render('evaluate/evaluate.html', c)
+		     
 }.require(precondition.login_required));
 
 
 router.post('/', function(req, res, next) {
 	//鏇存柊project
 	var updateOp = {$set:{
-		state  :  req.POST.state,
+		coachId  :  req.POST.coachId,
+	orderId  :  req.POST.orderId,
+	creatTime  :  req.POST.creatTime,
+	content  :  req.POST.content,
+	
 	}};
 
-	console.log(updateOp)
-
-	models.order.update({_id:req.POST.order_id }, updateOp).exec(function(err) {
+	models.evaluate.update({ }, updateOp).exec(function(err) {
 		if (err) {
 			console.log(err);
 			return 
@@ -57,6 +54,33 @@ router.post('/', function(req, res, next) {
 	});
 }.require(precondition.login_required));
 
+router.put('/', function(req, res, next) {
+	//鍒涘缓project
+	console.log(req.POST);
+	var evaluate = new models.evaluate({
+	coachId  :  req.POST.coachId,
+	orderId  :  req.POST.orderId,
+	content  :  req.POST.content
+	});
+	evaluate.save(function(err) {
+		if (err) {
+			return next(err);
+		}
+		console.log(err)
+
+		res.json({code:200});
+	});
+}.require(precondition.login_required));
+
+
+router.delete('/', function(req, res, next) {
+	models.evaluate.find().remove(function(err) {
+		if (err) {
+			return next(err);
+		}
+		res.json({code:200});
+	});
+}.require(precondition.login_required));
 
 
 router.isResource = true;
