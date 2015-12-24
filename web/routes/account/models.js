@@ -31,6 +31,8 @@ var UserSchema = new mongoose.Schema({
 	idof_yy: String,
 	role: String,
 	fighting: String,
+	introduction: String,
+	ponints: {type:Number, default:0},
 }, {
 	collection: 'account_user'
 });

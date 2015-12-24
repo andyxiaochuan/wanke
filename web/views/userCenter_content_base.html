@@ -12,8 +12,16 @@
 
         <ul class="nav navbar-nav">
             <li {% if first_nav_name == 'project' %}class="active"{% endif %}><a href="/coach/coachs/">首页</a></li>
-            <li {% if first_nav_name == 'project' %}class="active"{% endif %}><a href="/project/projects/">高手区</a></li>
-            <li {% if first_nav_name == 'project' %}class="active"{% endif %}><a href="/project/projects/">新闻区</a></li>
+            <li><a href="/userCenter/userCenter" class="active">我的主页</a></li>
+            <li><a href="/order/orders" >已购订单</a></li>
+            {% if user.is_coach == true %}
+            <li><a href="/coach/coach" >修改导师资料</a></li>
+            <li><a href="/normalcompany/normalcompany" >发布普通订单</a></li>
+            <li><a href="/order/coachorders" >预约订单</a></li>
+            {% else %}
+            <li><a href="/coach/coach" >升级为导师</a></li>
+            {% endif %}
+
             {% block header_navs %}
            
             {% endblock %}
@@ -41,20 +49,18 @@
     <div class="xui-contentPanel">
       <div class="xui-wrap">
         <div class="xui-i-left ">
-            
             <ul>
+                
                 <li><a href="/userCenter/userCenter" class="active">我的主页</a></li>
-               
-                <li><a href="/product/products" >已购订单</a></li>
-                <li><a href="">账号设置</a></li>
-                <li><a href="">账户充值</a></li>
-             
-                {% if user.is_coach == true %}
-                 <li><a href="/product/product" >发布普通订单</a></li>
-                {% else %}
-                {% endif %}
+            <li><a href="/order/orders" >已购订单</a></li>
+            {% if user.is_coach == true %}
+            <li><a href="/coach/coach" >修改导师资料</a></li>
+            <li><a href="/normalcompany/normalcompany" >发布普通订单</a></li>
+            <li><a href="/order/coachorders" >预约订单</a></li>
+            {% else %}
+            <li><a href="/coach/coach" >升级为导师</a></li>
+            {% endif %}
             </ul>
-            
         </div>
         <div class="xui-i-right">
             

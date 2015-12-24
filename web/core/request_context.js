@@ -1,6 +1,5 @@
 /*!
- * dorado
- *
+ * 
  * Copyright(c) andy
  * MIT Licensed
  */

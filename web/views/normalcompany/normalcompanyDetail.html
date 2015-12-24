@@ -25,15 +25,11 @@
 						<div class="form-group">
 							<label for="inputEmail3" class="col-sm-3 control-label">区服</label>
 							<div class="col-sm-8">
-								<div className="form-group pt10">
+								<div className="form-group">
 									<label className="col-sm-2 control-label"></label>
 									<div className="col-sm-8">
-										<select name="" id="" class="xa-ownerRegionalId">
-											<option>请选择区服</option>
-											{% for regional in regionals %}
-											<option value="{{regional.id}}">{{regional.name}} {% if regional.ownCarrieroperator==0 %}电信 {% else %} 网通 {% endif %}</option>
-											{% endfor %}
-										</select>
+										<input type="text" class="xa-sellerId xui-hide" value="{{coach.id}}">
+										{{regional.name}}-{% if regional.ownCarrieroperator==0 %}电信 {% else %} 网通 {% endif %}
 									</div>
 								</div>
 							</div>
@@ -50,15 +46,17 @@
 						<div   class="form-group ">
 			                <label for="logo_image" class="col-sm-3 control-label">可选时间：</label>
 			                <div class="col-sm-8">
-			                    <div class="form-inline">
-			                	{% for timePoint in normalcompany.timePoints %}
-									<div class="xa-timepoints">
-										<div  class="form-group mr30">
-											<span>{{timePoint.x}}:{{timePoint.y}}</span>
-										</div>
-										
-									</div>
-			                	{% endfor %}
+			                    <div class="form-inline w400">
+			                    	{% for date in dates %}
+					                	{% for timePoint in normalcompany.timePoints %}
+											<div class="xa-timepoints w150 fl">
+												<div  class="form-group mr30">
+													<span class="xa-times xui-time" data-time="{{date.Year}}/{{date.Month}}/{{date.Day}} {{timePoint.x}}:{{timePoint.y}}">{{date.Month}}月{{date.Day}}日  {{timePoint.x}}:{{timePoint.y}}</span>
+												</div>
+												
+											</div>
+					                	{% endfor %}
+			                    	{% endfor %}
 								</div>
 			                </div>
 			            </div>
@@ -75,7 +73,7 @@
 
 						</div>
 						<div class="form-group">
-							<label for="inputEmail3" class="col-sm-3 control-label">价格</label>
+							<label for="inputEmail3" class="col-sm-3 control-label xa-price" data-price={{normalcompany.price}}>价格</label>
 							<div class="col-sm-8">
 								<span>{{normalcompany.price}}</span>
 							</div>
@@ -96,7 +94,21 @@
 					<div class="form-group">
 						<span class="btn btn-success mt20 mb30 xa-submit" data-id={{normalcompany.id}}>购买</span>
 					</div>
-					<textarea  id="myEditor" ></textarea>
+
+					<div>
+						<!-- Nav tabs -->
+						<ul class="nav nav-tabs" role="tablist">
+							<li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">大神介绍</a></li>
+							<li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">会员服务</a></li>
+						</ul>
+						<!-- Tab panes -->
+						<div class="tab-content">
+							<div role="tabpanel" class="tab-pane active" id="home">
+								<div id="xa-html" data-str="{{coach.introduction}}"></div>
+							</div>
+							<div role="tabpanel" class="tab-pane" id="profile">暂未开通</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -109,19 +121,66 @@
 	<script type="text/javascript">
 	
 	    $(document).ready(function() {
-	    	// start uideit
-				UE.getEditor("myEditor");
-				var ue = UE.getContent();
-				//对编辑器的操作最好在编辑器ready之后再做
-				ue.ready(function() {
-				//设置编辑器的内容
-				ue.setContent('hello');
-				//获取html内容，返回: <p>hello</p>
-				var html = ue.getContent();
-				//获取纯文本内容，返回: hello
-				var txt = ue.getContentTxt();
+	    		_.delay(function() {
+			 		var htmlstr = $("#xa-html").attr("data-str")
+					$("#xa-html").html(htmlstr);
+				}, 100);
+
+				$(document).delegate(".xa-times",'click',function(){
+					
+					$(".xa-times").removeClass("xa-gameTime");
+					$(".xa-times").removeClass("xui-timeSelect");
+					$(this).addClass("xa-gameTime");
+					$(this).addClass("xui-timeSelect");
+					//$(".xa-times").removeClass(("xa-times");
 				});
+	    	// start uideit
+				// UE.getEditor("myEditor");
+				// var ue = UE.getContent();
+				// //对编辑器的操作最好在编辑器ready之后再做
+				// ue.ready(function() {
+				// //设置编辑器的内容
+				// ue.setContent('hello');
+				// //获取html内容，返回: <p>hello</p>
+				// var html = ue.getContent();
+				// //获取纯文本内容，返回: hello
+				// var txt = ue.getContentTxt();
+				// });
 			// end
+
+				$(document).delegate(".xa-submit","click",function(){
+					if($("body").find(".xa-gameTime").length == 0)
+					{
+						alert("请选择游戏时间");
+						return;
+					}
+					var data = {};
+					data.sellerId = $(".xa-sellerId").val();
+					data.price = $(".xa-price").attr("data-price");
+					data.gameTime = $(".xa-gameTime").attr("data-time");
+				
+					//data.orderid = $(this).attr('data-id');
+					console.log(data);
+					W.Resource.put({
+						resource: 'order.order',
+						data: data,
+						success: function(data) {
+							W.showHint('success', '成功，重新加载页面...');
+							_.delay(function() {
+							    window.location.reload();
+							}, 1000);
+						},
+						error: function() {
+						W.showHint('error', '更新失败！');
+		        		}
+					})	
+				})
+
+
+					
+	            
+
+
 		
 	    });
 	</script>

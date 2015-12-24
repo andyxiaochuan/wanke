@@ -1,11 +1,10 @@
-@normalcompany;
-#ownerUserId  :  t_string;
-#ownerRegionalId  :  t_string;
+@order;
+#buyerId  :  t_string;
+#sellerId  :  t_string;
 #price  :  t_string,
+#gameTime : t_time;
 #creatTime  :  t_time;
-#timePoints  : t_string;
-#remark  :  t_string;
-#mode  :  t_string;
-#protocol  :  t_string;
+#state  : t_number;
+
 
 

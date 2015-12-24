@@ -67,7 +67,6 @@
 								<th>mode</th>
 								<th>protocol</th>
 								<th>legal</th>
-							
 							</tr>
 						</thead>
 							<tbody>
@@ -108,11 +107,13 @@
 	
 
 	
-		//返回7天前后的时间，格式 ‘yyyy-mm-dd’
-		function date2str(yy, mm, dd, prenext) {
+		//返回n天前后的时间，格式 ‘yyyy-mm-dd’
+		function getDateByStr(yy, mm, dd, prenext,n) {
 		    var s, d, t, t2;
 		    t = Date.UTC(yy, mm, dd);
-		    t2 = 1 * 1000 * 3600 * 24; //加减1天的时间
+
+		    t2 = n * 1000 * 3600 * 24; //加减1天的时间
+
 		    if (prenext == 'pre') {
 		        t-= t2;
 		    } else {
@@ -124,7 +125,7 @@
 		    s += ("00"+d.getUTCDate()).slice(-2);
 		    alert(s);
 		}
-		function str2date(str, prenext){   
+		function getDateTimeByStr(str, prenext,n){   
 		  var   dd, mm, yy;   
 		  var   reg = /^(\d{4})-(\d{1,2})-(\d{1,2})$/;
 		  if (arr = str.match(reg)) {
@@ -140,9 +141,11 @@
 		 if (prenext == null || (prenext != 'pre' && prenext != 'next')) {
 		    var prenext = 'pre';
 		  }
-		  date2str(yy, mm, dd, prenext);
+		  getDateByStr(yy, mm, dd, prenext,n);
 		} 
-		str2date('2015-2-28', 'next');
+
+		getDateTimeByStr('2015-2-28', 'next',3);
+
 
 
 

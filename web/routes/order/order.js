@@ -15,24 +15,27 @@ var path = require('path');
 
 var accountModels = require('routes/account/models');
 var precondition = require('lib/precondition');
+var _ = require('underscore');
 var dumpRequest = require('core/dump_request').dumpRequest;
 var RequestContext = require('core/request_context').RequestContext;
 var settings = require('settings');
 
 var models = require('./models');
+var userModels = require('../account/models');
 
 
 router.get('/', function(req, res, next) {
 	
-		models.tiemline.find().sort({_id:-1}).exec(function(err, tiemlines) {
+		models.order.find().sort({_id:-1}).exec(function(err, orders) {
 			if (err) {
 				return next(err);
 			}
 			var c = RequestContext(req, {
-				tiemlines : tiemlines,
+				orders : orders,
+				is_coach: req.user.is_coach,
 			});
 
-			res.render('tiemline/tiemlines.html',c)
+			res.render('order/order.html', c)
 		});
 }.require(precondition.login_required));
 
@@ -40,16 +43,16 @@ router.get('/', function(req, res, next) {
 router.post('/', function(req, res, next) {
 	//鏇存柊project
 	var updateOp = {$set:{
-		text  :  req.POST.text,
-	name  :  req.POST.name,
-	feedman  :  req.POST.feedman,
-	content  :  req.POST.content,
-	mark  :  req.POST.mark,
-	order  :  req.POST.order,
+	buyerId  :  req.user.id,
+	sellerId  :  req.POST.sellerId,
+	price  :  req.POST.price,
+	gameTime  :  req.POST.gameTime,
+	creatTime  :  req.POST.creatTime,
+	state  :  req.POST.state,
 	
 	}};
 
-	models.tiemline.update({ }, updateOp).exec(function(err) {
+	models.order.update({ }, updateOp).exec(function(err) {
 		if (err) {
 			console.log(err);
 			return 
@@ -59,18 +62,19 @@ router.post('/', function(req, res, next) {
 }.require(precondition.login_required));
 
 router.put('/', function(req, res, next) {
-	//鍒涘缓project
-	console.log(req.POST);
-	var tiemline = new models.tiemline({
-		text  :  req.POST.text,
-	name  :  req.POST.name,
-	feedman  :  req.POST.feedman,
-	content  :  req.POST.content,
-	mark  :  req.POST.mark,
-	order  :  req.POST.order,
+
+	var order = new models.order({
+	buyerId  :  req.user.id,
+	sellerId  :  req.POST.sellerId,
+	price  :  req.POST.price,
+	gameTime  :  req.POST.gameTime,
+
 		
 	});
-	tiemline.save(function(err) {
+
+	console.log(order);
+	order.save(function(err) {
+		console.log(err)
 		if (err) {
 			return next(err);
 		}
@@ -81,7 +85,7 @@ router.put('/', function(req, res, next) {
 
 
 router.delete('/', function(req, res, next) {
-	models.tiemline.find().remove(function(err) {
+	models.order.find().remove(function(err) {
 		if (err) {
 			return next(err);
 		}

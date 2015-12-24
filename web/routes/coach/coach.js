@@ -35,6 +35,7 @@ router.post('/', function(req, res, next) {
 	idof_yy  :  req.POST.idof_yy,
 	is_coach  :  req.POST.is_coach,
 	is_verify  :  req.POST.is_verify,
+	introduction : req.POST.introduction,
 	}};
 
 	userModels.User.update({_id:req.user.id}, updateOp).exec(function(err) {

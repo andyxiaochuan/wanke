@@ -12,7 +12,7 @@ var mongoose = require('mongoose');
  * Category
  */
 var normalcompanySchema = new mongoose.Schema({
-		ownerUserId  :  String,
+	ownerUserId  :  String,
 	ownerRegionalId  :  String,
 	price  :  String,
 	creatTime  :  {type:Date, default:Date.now},

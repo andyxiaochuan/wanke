@@ -5,91 +5,91 @@
 	    <li {% if first_nav_name == 'project' %}class="active"{% endif %}><a href="/userCenter/userCenter/">个人中心</a></li>
 	{% endblock %}
 	{% block content-panel %}
-			<div class="xui-i-content">
-						注：个人信息填写错误，对方无法联系到你		
-					<div class="form-group">
-						<label for="inputEmail3" class="col-sm-3 control-label">支付宝账号"</label>
-						<div class="col-sm-8">
-							<input type="text" class="form-control xa-idof_zfb" value="{{user.idof_zfb}}" placeholder="">
-						</div>
-					</div>
-								
-					<div class="form-group">
-						<label for="inputEmail3" class="col-sm-3 control-label">身份证号"</label>
-						<div class="col-sm-8">
-							<input type="text" class="form-control xa-idof_person" value="{{user.idof_person}}" placeholder="">
-						</div>
-					</div>
-								
-					<div class="form-group">
-						<label for="inputEmail3" class="col-sm-3 control-label">电话"</label>
-						<div class="col-sm-8">
-							<input type="text" class="form-control xa-idof_tel" value="{{user.idof_tel}}" placeholder="">
-						</div>
-					</div>
-								
-					<div class="form-group">
-						<label for="inputEmail3" class="col-sm-3 control-label">QQ号"</label>
-						<div class="col-sm-8">
-							<input type="text" class="form-control xa-idof_qq" value="{{user.idof_qq}}" placeholder="">
-						</div>
-					</div>
-								
-					<div class="form-group">
-						<label for="inputEmail3" class="col-sm-3 control-label">YY账号"</label>
-						<div class="col-sm-8">
-							<input type="text" class="form-control xa-idof_yy" value="{{user.idof_yy}}" placeholder="">
-						</div>
-					</div>
-								
-					<div class="form-group">
-						<label for="inputEmail3" class="col-sm-3 control-label">导师权限"</label>
-						<div class="col-sm-8">
-							<input type="text" class="form-control xa-is_coach" value="{{user.is_coach}}" placeholder="">
-						</div>
-					</div>
-								
-					<div class="form-group">
-						<label for="inputEmail3" class="col-sm-3 control-label">头像是否通过审核"</label>
-						<div class="col-sm-8">
-							<input type="text" class=       "form-control xa-is_verify" value="{{user.is_verify}}" placeholder="">
-						</div>
-					</div>
-				
-				<div class="form-group">
-				</div>
-				<div class="form-group">
-					
-						<span for="inputEmail3" class="col-sm-3 control-label">
-							<span class="btn btn-success  xa-submit" data-id={{user.id}}>
-
-								{% if user.is_coach == true %}
-								修改
-								{% else %}
-								升级为导师
-								{% endif %}
-								</span>
-						</span>
-
-						<div class="col-sm-8">
-							<span>升级为导师才可以发布陪玩订单</span>
-						</div>
-				</div>
+	<div class="xui-i-content">
+		注：个人信息填写错误，对方无法联系到你		
+		<div class="form-group">
+			<label for="inputEmail3" class="col-sm-3 control-label">支付宝账号"</label>
+			<div class="col-sm-8">
+				<input type="text" class="form-control xa-idof_zfb" value="{{user.idof_zfb}}" placeholder="">
 			</div>
+		</div>
+					
+		<div class="form-group">
+			<label for="inputEmail3" class="col-sm-3 control-label">身份证号"</label>
+			<div class="col-sm-8">
+				<input type="text" class="form-control xa-idof_person" value="{{user.idof_person}}" placeholder="">
+			</div>
+		</div>
+			
+		<div class="form-group">
+			<label for="inputEmail3" class="col-sm-3 control-label">电话"</label>
+			<div class="col-sm-8">
+				<input type="text" class="form-control xa-idof_tel" value="{{user.idof_tel}}" placeholder="">
+			</div>
+		</div>
+					
+		<div class="form-group">
+			<label for="inputEmail3" class="col-sm-3 control-label">QQ号"</label>
+			<div class="col-sm-8">
+				<input type="text" class="form-control xa-idof_qq" value="{{user.idof_qq}}" placeholder="">
+			</div>
+		</div>
+			
+		<div class="form-group">
+			<label for="inputEmail3" class="col-sm-3 control-label">YY账号"</label>
+			<div class="col-sm-8">
+				<input type="text" class="form-control xa-idof_yy" value="{{user.idof_yy}}" placeholder="">
+			</div>
+		</div>
+					
+		<div class="form-group">
+			<label for="inputEmail3" class="col-sm-3 control-label">导师权限"</label>
+			<div class="col-sm-8">
+				<input type="text" class="form-control xa-is_coach" value="{{user.is_coach}}" placeholder="">
+			</div>
+		</div>
+					
+		<div class="form-group">
+			<label for="inputEmail3" class="col-sm-3 control-label">头像是否通过审核"</label>
+			<div class="col-sm-8">
+				<input type="text" class="form-control xa-is_verify" value="{{user.is_verify}}" placeholder="">
+			</div>
+		</div>
+		
+		<div class="form-group">
+		</div>
+		<div class="form-group">
+			
+				<span for="inputEmail3" class="col-sm-3 control-label">
+					<span class="btn btn-success  xa-submit" data-id={{user.id}}>
+
+						{% if user.is_coach == true %}
+						修改
+						{% else %}
+						升级为导师
+						{% endif %}
+						</span>
+				</span>
+
+				<div class="col-sm-8">
+					<span>升级为导师才可以发布陪玩订单</span>
+				</div>
+		</div>
+	</div>
 
 	{% endblock %}
-
-
 
 	{% block js %}
 	<script type="text/javascript">
 	
 	    $(document).ready(function() {
+	    	
 	
 			$(document).delegate(".xa-submit","click",function(){
 				var data = {};
 				
 				data.idof_zfb = $(".xa-idof_zfb").val();
+				//data.introduction = UE.getContent();
 				
 				data.idof_person = $(".xa-idof_person").val();
 				

@@ -1,51 +1,31 @@
-
-	{% extends "../userCenter_content_base.html" %}
+{% extends "../userCenter_content_base.html" %}
 		{% block header_navs %}
 		    <li {% if first_nav_name == 'project' %}class="active"{% endif %}><a href="/userCenter/userCenter/">个人中心</a></li>
 		{% endblock %}
 		{% block content-panel %}
-	
 	<div class="xui-userCenterPage">
 				<div class="xui-i-content">
-					<a class="glyphicon glyphicon-plus btn btn-primary" href="/tiemline/tiemline/">Add tiemline </a>
 					<table class="table table-bordered table-striped mt10 ">
 						<thead>
 							<tr>
-								
-								<th>text</th>
-								
-								<th>name</th>
-								
-								<th>feedman</th>
-								
-								<th>content</th>
-								
-								<th>mark</th>
-								
-								<th>order</th>
-								
+								<th>导师</th>
+								<th>价格</th>
+								<th>游戏时间</th>
+								<th>下单时间</th>
+								<th>订单状态</th>
 								<th>操作</th>
 							</tr>
 						</thead>
 							<tbody>
-							{% for tiemline in tiemlines %}
+							{% for order in orders %}
 							<tr>
-								
-								<td>{{tiemline.text}}</td>
-								
-								<td>{{tiemline.name}}</td>
-								
-								<td>{{tiemline.feedman}}</td>
-								
-								<td>{{tiemline.content}}</td>
-								
-								<td>{{tiemline.mark}}</td>
-								
-								<td>{{tiemline.order}}</td>
-								
+								<td> <div  class="xui-userHeaderSmall" style="background-image:url(/static/img/user/{{ order.buyer.name }}.jpg)"></div></td>
+								<td>{{order.price}}</td>
+								<td>{{order.gameTime|date('Y-m-d-h-i', -480, 'CCT')}}</td>
+								<td>{{order.creatTime|date('Y-m-d-h-i', -480, 'CCT')}}</td>
+								<td>{{order.state}}</td>
 								<td> 
-									<a class="btn btn-primary " href="/tiemline/tiemline/?tiemline_id={{tiemline.id}}"> 编辑</a>
-									<a href="javascript:void(0);" class="btn btn-danger xa-delete" data-id={{tiemline.id}}>删除</a>  
+									<a class="btn btn-primary " href="/order/order/?order_id={{order.id}}"> 编辑</a>
 								</td>
 							</tr>
 							{% endfor %}
@@ -61,25 +41,25 @@
 	    $(document).ready(function() {
 	
 			$(document).delegate(".xa-delete","click",function(){
-				var tiemline_id = $(this).attr("data-id");
+				var order_id = $(this).attr("data-id");
 				var data = {};
 				
-				data.text = $(".xa-text").val();
+				data.buyerId = $(".xa-buyerId").val();
 				
-				data.name = $(".xa-name").val();
+				data.sellerId = $(".xa-sellerId").val();
 				
-				data.feedman = $(".xa-feedman").val();
+				data.price = $(".xa-price").val();
 				
-				data.content = $(".xa-content").val();
+				data.gameTime = $(".xa-gameTime").val();
 				
-				data.mark = $(".xa-mark").val();
+				data.creatTime = $(".xa-creatTime").val();
 				
-				data.order = $(".xa-order").val();
+				data.state = $(".xa-state").val();
 				
 				W.Resource.delete({
-	                    resource: 'project.tiemline',
+	                    resource: 'project.order',
 	                    data: {
-	                        tiemline_id: tiemline_id
+	                        order_id: order_id
 	                    },
 	                    success: function(data) {
 	                        W.showHint('success', '删除成功');
