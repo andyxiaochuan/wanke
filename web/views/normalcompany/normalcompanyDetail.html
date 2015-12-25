@@ -4,113 +4,160 @@
 	{% endblock %}
 	{% block content-panel %}
 
-	<div id="main-panel">
+	<div id="main-panel " class="xui-page-normalcompany">
     <div class="xui-contentPanel">
 		<div class="xui-wrap">
-			<div class="xui-i-left ">
-			    
-			    <div class="xui-user-img" style="background-image:url(/static/img/user/{{ coach.name }}.jpg)"></div>
-					<div class="xui-info">
+			<div class="xui-top">
 
-					<p>等级：{{ coach.grade }}</p>
-					<p>角色：{{ coach.role }}</p>
-					<p>战斗力：{{ coach.fighting }}</p>
+				<div class="xui-i-left ">
+				    
+				    <div class="xui-user-img" style="background-image:url(/static/img/user/{{ coach.name }}.jpg)"></div>
+						<div class="xui-info mt10">
+
+						<p>等级：{{ coach.grade }}</p>
+						<p>角色：{{ coach.role }}</p>
+						<p>战斗力：{{ coach.fighting }}</p>
+					</div>
+
+				    
 				</div>
-			    
-			</div>
-			<div class="xui-i-right">
-			    
-		        <div class="xui-i-content">
-				
-						<div class="form-group">
-							<label for="inputEmail3" class="col-sm-3 control-label">区服</label>
-							<div class="col-sm-8">
-								<div className="form-group">
-									<label className="col-sm-2 control-label"></label>
-									<div className="col-sm-8">
-										<input type="text" class="xa-sellerId xui-hide" value="{{coach.id}}">
-										{{regional.name}}-{% if regional.ownCarrieroperator==0 %}电信 {% else %} 网通 {% endif %}
+				<div class="xui-i-right">
+				    
+			        <div class="xui-i-content">
+						<div class="col-sm-7">
+							<div class="form-group">
+								<span for="inputEmail3" class="col-sm-2 control-span">区服</span>
+								<div class="col-sm-5">
+									<div className="form-group">
+										<span className="col-sm-2 control-span"></span>
+										<div className="col-sm-5">
+											<input type="text" class="xa-sellerId xui-hide" value="{{coach.id}}">
+											{{regional.name}}-{% if regional.ownCarrieroperator==0 %}电信 {% else %} 网通 {% endif %}
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-									
-									
-						<!-- <div class="form-group">
-							<label for="inputEmail3" class="col-sm-3 control-label">创建时间</label>
-							<div class="col-sm-8">
-								<input type="text" class="form-control xa-creatTime" value="{{normalcompany.creatTime}}" placeholder="">
+										
+										
+							<!-- <div class="form-group">
+								<span for="inputEmail3" class="col-sm-2 control-span">创建时间</span>
+								<div class="col-sm-5">
+									<input type="text" class="form-control xa-creatTime" value="{{normalcompany.creatTime}}" placeholder="">
+								</div>
 							</div>
-						</div>
-								 -->	
-						<div   class="form-group ">
-			                <label for="logo_image" class="col-sm-3 control-label">可选时间：</label>
-			                <div class="col-sm-8">
-			                    <div class="form-inline w400">
-			                    	{% for date in dates %}
-					                	{% for timePoint in normalcompany.timePoints %}
-											<div class="xa-timepoints w150 fl">
-												<div  class="form-group mr30">
-													<span class="xa-times xui-time" data-time="{{date.Year}}/{{date.Month}}/{{date.Day}} {{timePoint.x}}:{{timePoint.y}}">{{date.Month}}月{{date.Day}}日  {{timePoint.x}}:{{timePoint.y}}</span>
+									 -->	
+										
+							<div class="form-group">
+								<span for="inputEmail3" class="col-sm-2 control-span">模式</span>
+								<div class="col-sm-5">
+									{% for mode in normalcompany.mode %}
+									<div class="xa-modes">
+										<span>{{mode}}</span>
+									</div>
+									{% endfor %}
+								</div>
+
+							</div>
+							<div class="form-group">
+								<span for="inputEmail3" class="col-sm-2 control-span xa-price" data-price={{normalcompany.price}}>价格</span>
+								<div class="col-sm-5">
+									<span>{{normalcompany.price}}</span>
+								</div>
+							</div>
+										
+							<div class="form-group">
+								<span for="inputEmail3" class="col-sm-2 control-span">备注</span>
+								<div class="col-sm-5">
+									<span>{{normalcompany.remark}}</span>
+								</div>
+							</div>
+										
+							<div class="form-group">
+								<span for="inputEmail3" class="col-sm-2 control-span">协议</span>
+								<div class="col-sm-5">
+								<span>{{normalcompany.protocol}}</span>
+								</div>
+							</div>
+						
+							<div   class="form-group ">
+				                <span for="logo_image" class="col-sm-2 control-span">时段</span>
+				                <div class="col-sm-5">
+				                    <div class="form-inline w400">
+				                    	{% for date in dates %}
+						                	{% for timePoint in normalcompany.timePoints %}
+												<div class="xa-timepoints mb10 fl">
+													<div  class="form-group mr30">
+														<span class="xa-times xui-time" data-time="{{date.Year}}/{{date.Month}}/{{date.Day}} {{timePoint.x}}:{{timePoint.y}}">{{date.Month}}月{{date.Day}}日  {{timePoint.x}}:{{timePoint.y}}</span>
+													</div>
+													
 												</div>
-												
-											</div>
-					                	{% endfor %}
-			                    	{% endfor %}
-								</div>
-			                </div>
-			            </div>
-									
-						<div class="form-group">
-							<label for="inputEmail3" class="col-sm-3 control-label">模式</label>
-							<div class="col-sm-8">
-								{% for mode in normalcompany.mode %}
-								<div class="xa-modes">
-									<span>{{mode}}</span>
-								</div>
-								{% endfor %}
+						                	{% endfor %}
+				                    	{% endfor %}
+									</div>
+				                </div>
+				            </div>
+    						<div class="form-group">
+								<span class="btn btn-success mt20 mb30 pl30 pr30 xa-submit" data-id={{normalcompany.id}}>购买</span>
 							</div>
 
 						</div>
-						<div class="form-group">
-							<label for="inputEmail3" class="col-sm-3 control-label xa-price" data-price={{normalcompany.price}}>价格</label>
-							<div class="col-sm-8">
-								<span>{{normalcompany.price}}</span>
-							</div>
-						</div>
+						<div class="col-sm-5">
+							<div >
+								
+								<div class="form-group pt100">
+									<div style="line-height:20px;">大神实力</div>
 									
-						<div class="form-group">
-							<label for="inputEmail3" class="col-sm-3 control-label">备注</label>
-							<div class="col-sm-8">
-								<span>{{normalcompany.remark}}</span>
-							</div>
-						</div>
+									<input id="ex1" type="text" data-slider-min="0" data-slider-max="100" data-slider-step="5" data-slider-value="88"/&t
+									<span id="ex6CurrentSliderValLabel"><span class="ml15" id="ex1SliderVal">50</span>分</span>
+							
+									<div style="line-height:20px;">教学互动</div>
+									<input id="ex2" type="text" data-slider-min="0" data-slider-max="100" data-slider-step="5" data-slider-value="75"/&t
+									<span id="ex6CurrentSliderValLabel"><span class="ml15" id="ex2SliderVal">50</span>分</span>
+								
+								
+									<div style="line-height:20px;">服务态度</div>
+									<input id="ex3" type="text" data-slider-min="0" data-slider-max="100" data-slider-step="5" data-slider-value="95"/&t
+									<span id="ex6CurrentSliderValLabel"><span class="ml15" id="ex3SliderVal">50</span>分</span>
 									
-						<div class="form-group">
-							<label for="inputEmail3" class="col-sm-3 control-label">协议</label>
-							<span>{{normalcompany.protocol}}</span>
+								
+									<div style="line-height:20px;">满意程度</div>
+									<input id="ex4" type="text" data-slider-min="0" data-slider-max="100" data-slider-step="5" data-slider-value="92"/&t
+									<span id="ex6CurrentSliderValLabel"><span class="ml15" id="ex4SliderVal">50</span>分</span>
+
+									<div style="line-height:20px;">综合评价</div>
+									<input id="ex5" type="text" data-slider-min="0" data-slider-max="5" data-slider-step="1" data-slider-value="5"/&t
+									<span id="ex6CurrentSliderValLabel"><span class="ml15" id="ex5SliderVal">5</span>星</span>
+
+								
+								</div>
+							</div>
 						</div>
 					
-					<div class="form-group">
-						<span class="btn btn-success mt20 mb30 xa-submit" data-id={{normalcompany.id}}>购买</span>
-					</div>
 
-					<div>
-						<!-- Nav tabs -->
-						<ul class="nav nav-tabs" role="tablist">
-							<li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">大神介绍</a></li>
-							<li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">会员服务</a></li>
-						</ul>
-						<!-- Tab panes -->
-						<div class="tab-content">
-							<div role="tabpanel" class="tab-pane active" id="home">
-								<div id="xa-html" data-str="{{coach.introduction}}"></div>
-							</div>
-							<div role="tabpanel" class="tab-pane" id="profile">暂未开通</div>
-						</div>
+						
 					</div>
 				</div>
+				<div class="cb"></div>
+				
 			</div>
+
+			<div class="mt30">
+				<!-- Nav tabs -->
+				<ul class="nav nav-tabs" role="tablist">
+					<li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">大神介绍</a></li>
+					<li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">会员服务</a></li>
+				</ul>
+				<!-- Tab panes -->
+				<div class="tab-content">
+					<div role="tabpanel" class="tab-pane active xui-html" id="home">
+						<div id="xa-html" data-str="{{coach.introduction}}"></div>
+					</div>
+					<div role="tabpanel" class="tab-pane" id="profile">暂未开通</div>
+				</div>
+			</div>
+
+
+
 		</div>
     </div>
 </div>
@@ -121,6 +168,37 @@
 	<script type="text/javascript">
 	
 	    $(document).ready(function() {
+
+
+
+				$("#ex1").slider();
+				$("#ex1").on("slide", function(slideEvt) {
+					$("#ex1SliderVal").text(slideEvt.value);
+				});
+
+				$("#ex2").slider();
+				$("#ex2").on("slide", function(slideEvt) {
+					$("#ex2SliderVal").text(slideEvt.value);
+				});
+
+				$("#ex3").slider();
+				$("#ex3").on("slide", function(slideEvt) {
+					$("#ex3SliderVal").text(slideEvt.value);
+				});
+
+				$("#ex4").slider();
+				$("#ex4").on("slide", function(slideEvt) {
+					$("#ex4SliderVal").text(slideEvt.value);
+				});
+
+				$("#ex5").slider();
+				$("#ex5").on("slide", function(slideEvt) {
+					$("#ex5SliderVal").text(slideEvt.value);
+				});
+
+
+
+
 	    		_.delay(function() {
 			 		var htmlstr = $("#xa-html").attr("data-str")
 					$("#xa-html").html(htmlstr);

@@ -1,60 +1,152 @@
 {% extends "../content_base.html" %}
+
+{% block html_css %}
+
+{% endblock %}
 {% block header_navs %}
     <li {% if first_nav_name == 'project' %}class="active"{% endif %}><a href="/userCenter/userCenter/">个人中心</a></li>
 {% endblock %}
 {% block content-panel %}
-<div class="xa-projectsPage xui-projectPage">
-    <div class="xui-scroll">
-       <!--  <div class="xui-wrap">
-            <div class="xui-login-box pa">
-                <div class="xui-back-wrap">
-                    <div class="xui-back-box"></div>
-                </div>
-                <div class="xui-input-box">
-                    <div class="form-group mt100">
-                        <sapn for="name" class="col-sm-3 xui-name xui-color-white">用户名</sapn>
-                        <div class="col-sm-9 pl0">
-                            <input type="text" class="form-control xa-name" value="{{product.name}}" data-validate="require-notempty" maxlength="12" placeholder="最多输入12个字符">
-                            <div class="errorHint"></div>
-                        </div>
-                    </div>
-                    <div class="form-group pt50">
-                        <sapn for="name" class="col-sm-3 xui-name xui-color-white">密码</sapn>
-                        <div class="col-sm-9 pl0">
-                            <input type="password" class="form-control xa-name" value="{{product.name}}" data-validate="require-notempty" maxlength="12" placeholder="最多输入12个字符">
-                            <div class="errorHint"></div>
-                        </div>
-                    </div>
-                    <div class="form-group pt50">
-                        <div for="name" class="col-sm-8"></div>
-                        <div class="col-sm-4">
-                            <span class="btn btn-success">登录</span>
-                        </div>
-                    </div>
-                </div>
+<div class="xa-projectsPage xui-projectPage" style="">
+     
+    <!--     <div style="width:100%; height:400px;overflow:hidden; ">
+            <div class="xui-scroll" style="position:relative; top:-50px; left:-50px; width:120%;">
+                <div style="width:100%; height:100%; background-color:#000; opacity:0.6">
+                        <div class="xui-wrap">
+                            <div class="xui-login-box pa">
+                                <div class="xui-back-wrap">
+                                    <div class="xui-back-box"></div>
+                                </div>
+                                <div class="xui-input-box">
+                                    <div class="form-group mt100">
+                                        <sapn for="name" class="col-sm-3 xui-name xui-color-white">用户名</sapn>
+                                        <div class="col-sm-9 pl0">
+                                            <input type="text" class="form-control xa-name" value="{{product.name}}" data-validate="require-notempty" maxlength="12" placeholder="最多输入12个字符">
+                                            <div class="errorHint"></div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group pt50">
+                                        <sapn for="name" class="col-sm-3 xui-name xui-color-white">密码</sapn>
+                                        <div class="col-sm-9 pl0">
+                                            <input type="password" class="form-control xa-name" value="{{product.name}}" data-validate="require-notempty" maxlength="12" placeholder="最多输入12个字符">
+                                            <div class="errorHint"></div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group pt50">
+                                        <div for="name" class="col-sm-8"></div>
+                                        <div class="col-sm-4">
+                                            <span class="btn btn-success">登录</span>
+                                        </div>
+                                    </div>
+                                </div>
 
+                            </div>
+                        </div>
+                </div>
             </div>
         </div> -->
-    </div>
     <div class="xui-wrap">
+
+
+        <div class="xui-scroll">
+            
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide xui-slide1">Slide 1</div>
+                    <div class="swiper-slide xui-slide2">Slide 2</div>
+                    <div class="swiper-slide xui-slide3">Slide 3</div>
+                    <div class="swiper-slide xui-slide4">Slide 4</div>
+                    <div class="swiper-slide xui-slide5">Slide 5</div>
+                </div>
+            </div>
+        </div>
+        
+
+        <img style= src="/static/img/bk/searchTitle.png" alt="" />
+        <div class="filter-bar clearfix">
+            <div class="sort fl" id="data_filter" url="http://wan.5153.com/?server=&amp;tag=today" filter="" orderby="">
+                <a href="javascript:;" class="by-global" id="orderby_default">综合排序</a>
+                <a href="javascript:;" class="by-price icon-wrap" id="orderby_price"><em class="txt">价格</em></a>
+                <a href="javascript:;" class="by-level icon-wrap" id="orderby_score"><em class="txt">等级</em></a>
+                <a href="javascript:;" class="by-combat icon-wrap" id="orderby_combat"><em class="txt">战斗力</em></a>
+                <span class="by-male"><input type="checkbox" id="filter_boy"><label for="filter_boy">汉子</label></span>
+                <span class="by-female"><input type="checkbox" id="filter_girl"><label for="filter_girl">妹纸</label></span>
+                <span class="by-guarantee"><input type="checkbox" id="filter_win"><label for="filter_win">包赢</label></span>
+                <span class="by-vidoe"><input type="checkbox" id="filter_auth"><label for="filter_auth">视频认证</label></span>
+            </div>
+            <div class="lit-page-nav fr">
+                <span><em class="current-page-num highlight">1</em>/<em class="whole-page-num">4</em>页</span>
+                <a href="javascript:;" class="prev-page disabled">&lt;</a>
+                <a href="http://wan.5153.com/?server=&amp;tag=today&amp;filter=&amp;orderby=&amp;p=2" class="next-page">&gt;</a>
+            </div>
+        </div>
+       <!--  <div >
+            <div class="row">
+                <div class="col-lg-4">
+                </div>
+                <div class="col-lg-4">
+                    <div class="input-group">
+                    <div class="input-group-btn">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action <span class="caret"></span></button>
+                    <ul class="dropdown-menu">
+                    <li><a href="#">Action</a></li>
+                    <li><a href="#">Another action</a></li>
+                    <li><a href="#">Something else here</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="#">Separated link</a></li>
+                    </ul>
+                    </div>
+                    <input type="text" class="form-control" aria-label="...">
+                    </div>
+                </div>
+                
+            </div>
+            <div class="row mt50"> 
+                <div class="col-lg-4">
+                </div>
+                <div class="col-lg-4">   
+                    <div class="input-group">
+                    <input type="text" class="form-control" aria-label="...">
+                    <div class="input-group-btn">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action <span class="caret"></span></button>
+                    <ul class="dropdown-menu dropdown-menu-right">
+                    <li><a href="#">Action</a></li>
+                    <li><a href="#">Another action</a></li>
+                    <li><a href="#">Something else here</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="#">Separated link</a></li>
+                    </ul>
+                    </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt10">
+                <div class="col-lg-5">
+                </div>
+                <div class="col-lg-4">
+                      <img  src="/static/img/bk/btn_search.png" alt="" />
+                </div>
+            </div>
+        </div> -->
        <!--  <ul class="breadcrumb">
             <li>您当前所在位置</li>
             <li><a href="/project/projects/">网络</a></li>
         </ul>  -->
-        -------------------{{ is_coach }}-------------------------
-        {% for coach in users %}
-        <div class="xui-box">
-        	<a href="/normalcompany/normalcompanyDetail/?coachid={{coach.id}}">
-	            <div class="xui-img" style="background-image:url(/static/img/user/{{ coach.name }}.jpg)"></div>
-	            <div class="xui-info">
-	             
-	                <p>等级：{{ coach.grade }}</p>
-                    <p>密码：{{ coach.password }}</p>
-	                <span class="xui-btn-buy">buy</span>
-	            </div>
-        	</a>
+        <div class="xui-coach">
+            {% for coach in users %}
+            <div class="xui-box {% if loop.first %} {% else %} {% if (loop.index+1)%5 ==1 %} xui-box-last {% else %} {% endif %} {% endif %} ">
+                <a href="/normalcompany/normalcompanyDetail/?coachid={{coach.id}}">
+                    <div class="xui-img" style="background-image:url(/static/img/user/{{ coach.name }}.jpg)"></div>
+                    <div class="xui-info">
+                    
+                        <p>{{ coach.name }}</p>
+                        <!-- <p>密码：{{ coach.password }}</p> -->
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
         </div>
-        {% endfor %}
       <!--   <div class="xui-friend-box">
             <p>好友推荐</p>
             <div class="xui-friend" style="background-image:url(/static/img/user/user1.jpg)"></div>
@@ -65,11 +157,80 @@
             <div class="xui-friend" style="background-image:url(/static/img/user/user6.jpg)"></div>
         </div> -->
 
+        <div class="cb"></div>
+        <div class="xui-news mt10 fl">
+
+
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">等待游戏</a></li>
+                <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">已结束游戏</a></li>
+           
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="home">
+                    <ul>
+                        <li>玩家： ksy 等待游戏----接单：只爱陌生人</li>
+                        <li>玩家： ksy 等待游戏----接单：只爱陌生人</li>
+                        <li>玩家： ksy 等待游戏----接单：只爱陌生人</li>
+                        <li>玩家： ksy 等待游戏----接单：只爱陌生人</li>
+                    </ul>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="profile">
+                    <ul>
+                        <li>玩家： ksy 以结束游戏----接单：只爱陌生人</li>
+                    </ul>
+
+                </div>
+                
+            </div>
+        </div>
+
+        <div class="xui-news mt10 fr">
+
+
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">最新新闻</a></li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="home">
+                    <ul>
+                        <li>玩家： ksy 等待游戏----接单：只爱陌生人</li>
+                        <li>玩家： ksy 等待游戏----接单：只爱陌生人</li>
+                        <li>玩家： ksy 等待游戏----接单：只爱陌生人</li>
+                        <li>玩家： ksy 等待游戏----接单：只爱陌生人</li>
+                    </ul>
+                </div>
+               
+            </div>
+        </div>
+    </div>
+
+<div class="cb"></div>
+       <!-- Swiper -->
+
+
+
+  
+
 {% endblock %}
 
 
 {% block js %}
 <script type="text/javascript">
-   
+    var mySwiper = new Swiper('.swiper-container',{
+        pagination: '.swiper-pagination',
+        autoplay : 3000,
+        speed : 4000,
+        grabCursor: true,
+        centeredSlides: true,
+        slidesPerView: 'auto',
+        
+    })
 </script>
 {% endblock %}
