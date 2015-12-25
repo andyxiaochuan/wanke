@@ -100,7 +100,6 @@ html, body {
 
 
 .xui-projectPage {
-    background-color: #f2f2f2
 }
 
 .xui-projectPage .xui-friend-box {
@@ -123,16 +122,20 @@ html, body {
 
 
 .xui-projectPage .xui-wrap .xui-box{
-    width: 170px;
-    height: 300px;
+    width: 172px;
+    height: 250px;
     border-radius: 5px;
     float: left;
-    margin-right: 20px;
+    margin-right: 40px;
     margin-top: 30px;
     background-color: #fff;
-    -moz-box-shadow: 2px 4px 6px -3px #ccc;/* 老的 Firefox */
-    box-shadow: 2px 4px 6px -3px #ccc;
     position: relative;
+    border: 1px solid #ccc;
+    padding: 5px;
+}
+
+.xui-projectPage .xui-wrap .xui-box-last{
+    margin-right: 0px!important;
 }
 
 .xui-projectPage .xui-wrap .xui-box p{
@@ -143,9 +146,8 @@ html, body {
 }
 
 .xui-projectPage .xui-wrap .xui-box .xui-img{
-    border-radius: 5px 5px 0px 0px;
     width: 100%;
-    height: 170px;
+    height: 210px;
     background-size: cover;
 
 }
@@ -158,7 +160,7 @@ html, body {
 }
 
 .xui-projectPage .xui-wrap .xui-box .xui-info{
-    margin-top:20px;
+    margin-top:10px;
 }
 
 .xui-projectPage .xui-wrap .xui-box .xui-btn-buy {
@@ -173,19 +175,14 @@ html, body {
     right: 10px;
 }
 
- p{
-    margin-left: 5px;
-   color:orange;
-    font-size: 16px;
-}
-
-
-
  .xui-wrap .xui-i-left{
-    width: 200px;
+    padding: 10px;
+    width: 220px;
     height: 100%;
     background-color: #fff;
     float: left;
+    min-height: 540px;
+    border-right: 1px solid #ccc;
 
 }
 
@@ -199,6 +196,37 @@ html, body {
 
 }
 
+/*.xui-contentPanel {
+     background: url(/static/img/lunbo/scroll.jpg) no-repeat center center;background-size: 100%;
+    
+}
+
+
+.xui-contentPanel .xui-contentPanelBk {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    opacity: 0.8;
+}
+*/
+
+
+
+
+
+.xui-page-normalcompany .xui-user-img {
+    border-radius: 0;
+    width: 200px;
+    height: 260px;
+    background-size: cover;
+
+}
+
+.xui-page-normalcompany .xui-i-left p {
+   line-height: 15px;
+
+}
 
 
 
