@@ -1,31 +1,73 @@
-<!DOCTYPE html>
-<html style="background-color:#EDEDED;">
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>玩客 —— rank</title>
-	    <link type="text/css" rel="stylesheet" media="all" href="/static/css/base.css">
-	    <link type="text/css" rel="stylesheet" media="all" href="/static/lib/bootstrap-3.3.4/css/bootstrap.min.css">
-	    <link type="text/css" rel="stylesheet" media="all" href="/static/css/login.css">
-    </head>
-    <body class="xui-registerPage">
-    	<form method="post" action="/account/register/?_method=put" class="xui-registerPage-form">
-    		<h1 class="xui-i-logo tc">Guppy</h1>
-    		<div class="form-group mt40">
-    			<input name="username" type="text" class="form-control" placeholder="用户名" />
-    		</div>
-    		<div class="form-group">
-    			<input name="password" type="password" class="form-control" placeholder="密码" />
-    		</div>
-    		<div class="form-group">
-    			<input type="submit" class="btn btn-success form-control" value="注册" />
-    		</div>
-    	</form>
-        
-        <script type="text/javascript" src="/static/lib/jquery/jquery-1.11.2.min.js"></script>
-        <script type="text/javascript">
-	        $(document).ready(function() {
-		       $('[name="username"]').focus();
-	        });
+
+{% extends "../base.html" %}
+
+{% block content %}
+    <div >
+        <div class="xui-registerPage-form">
+            <h1 class="xui-i-logo tc">ranke</h1>
+            <div class="form-group mt40">
+                <input name="username" type="text" class="form-control xa-username" placeholder="用户名" />
+            </div>
+            <div class="form-group">
+                <input name="password" type="password" class="form-control xa-password" placeholder="密码" />
+            </div>
+            <div class="form-group">
+
+                <div class="checkbox">
+                    <label>
+                        男:<input type="radio" name="six" checked value="1"/>
+                    </label>
+                    <label>
+                        女:<input type="radio" name="six" value="0"/>
+                    </label>
+                </div>
+              </div>
+            <div class="form-group">
+                <input type="submit" class="btn btn-success xa-submit form-control" value="注册" />
+            </div>
+        </div>
+    </div>    
+
+{% endblock %}
+
+{% block base_js %}
+    <div id="jsons" style="display: none;">
+    {% for inner_json_name, inner_json_content in jsons.items %}
+    <div id="__json-{{inner_json_name}}">
+        {{inner_json_content|safe}}
+    </div>
+    {% endfor %}
+    </div>
+
+    <script type="text/javascript">
+    W.uid = "{{ req.user.id }}";
+    W.API_VERSION = 1;
+    </script>
+   <script type="text/javascript">
+            $(document).ready(function() {
+               $('[name="username"]').focus();
+
+                $(document).delegate(".xa-submit","click",function(){
+                    data = {};
+                    var six = $('input[name="six"]:checked ').val();
+                    data.username = $('.xa-username').val();
+                    data.password = $('.xa-password').val();
+                    data.six = six;
+                    W.Resource.put({
+                        resource: 'account.register',
+                        data: data,
+                        success: function(data) {
+                            console.log(data);
+                            alert("注册成功")
+                            window.location.href = "/account/login";
+                        },
+                        error: function(data) {
+                        alert(data);
+                        }
+                    })  
+                })
+            });
         </script>
-	</body>
-</html>
+   
+    {% block js %}{% endblock %}
+{% endblock %}

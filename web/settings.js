@@ -19,7 +19,7 @@ exports.MONGO = 'mongodb://127.0.0.1/guppy';
 exports.LOGIN_URL = '/account/login/';
 
 //登录成功情况下跳转的页面链接
-exports.LOGINED_URL = '/project/projects/'
+exports.LOGINED_URL = '/coach/coachs/'
 
 //RequectContext使用的processor
 exports.CONTEXT_PROCESSORS = [

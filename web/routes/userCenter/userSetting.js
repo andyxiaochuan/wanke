@@ -22,7 +22,7 @@ router.get('/', function(req, res, next) {
 			userList: user,
 			is_coach: req.user.is_coach
 		});
-		res.render('userCenter/userCenter.html', c);
+		res.render('userCenter/userSetting.html', c);
 	});
 
 }.require(precondition.login_required));
@@ -30,8 +30,7 @@ router.get('/', function(req, res, next) {
 router.post('/', function(req, res, next) {
 	//鏇存柊project
 	var updateOp = {$set:{
-	introduction : req.POST.introduction,
-	
+		user_img : req.POST.user_img,
 	}};
 
 	userModels.User.update({_id:req.user.id}, updateOp).exec(function(err) {

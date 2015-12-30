@@ -4,7 +4,6 @@
 		{% endblock %}
 		{% block content-panel %}
 			<div class="xui-i-content ">
-				{% for user in userList %}
 				<div>
 					<div class="xui-userHeader" style="background-image:url(/static/img/user/{{user.name}}.jpg)"></div>
 					<div class="xui-userInfo fl">
@@ -38,7 +37,9 @@
 						
 					</div>
 				</div>
-				{% endfor %}
+
+
+
 				<div class="cb"></div>
 				<div class="" id="container"></div>
 					<span class="btn btn-success xa-submit" data-id={{user.id}}>保存</span>

@@ -11,17 +11,11 @@
         </div>
 
         <ul class="nav navbar-nav">
-            <li {% if first_nav_name == 'project' %}class="active"{% endif %}><a href="/coach/coachs/">首页</a></li>
-            <li><a href="/userCenter/userCenter" class="active">我的主页</a></li>
-            <li><a href="/order/orders" >已购订单</a></li>
-            {% if user.is_coach == true %}
-            <li><a href="/coach/coach" >修改导师资料</a></li>
-            <li><a href="/normalcompany/normalcompany" >发布普通订单</a></li>
-            <li><a href="/order/coachorders" >预约订单</a></li>
-            {% else %}
-            <li><a href="/coach/coach" >升级为导师</a></li>
-            {% endif %}
-
+            <li><a href="/usersManger/audit/">头像审核</a></li>
+            <li><a href="/usersManger/allusers" class="active">用户统计</a></li>
+            <li><a href="/usersManger/orders" >订单统计</a></li>
+            <li><a href="/coach/coach" >投诉处理</a></li>
+            <li><a href="/news/news" >新闻管理</a></li>
             {% block header_navs %}
            
             {% endblock %}
@@ -48,35 +42,10 @@
 <div id="main-panel">
     <div class="xui-contentPanel">
       <div class="xui-wrap">
-        <div class="xui-i-left ">
-            <ul>
-                
-                <li><a href="/userCenter/userCenter" >我的主页</a></li>
-            <li><a href="/order/orders" >已购订单</a></li>
-            <li><a href="/userCenter/userSetting" >个人设置</a></li>
-
-            {% if user.is_coach == true %}
-            <li><a href="/coach/coach" >修改导师资料</a></li>
-            <li><a href="/normalcompany/normalcompany" >发布普通订单</a></li>
-            <li><a href="/order/coachorders" >预约订单</a></li>
-            {% else %}
-            <li><a href="/coach/coach" >升级为导师</a></li>
-            {% endif %}
-            
-            <li><a href="/usersManger/allusers" >用户管理</a></li>
-            </ul>
-        </div>
-        <div class="xui-i-right">
-            
-                 <!-- 内容 start -->
-                {% block content-panel %}{% endblock %}
-                 <!-- 内容 end -->
-        </div>
+        <!-- 内容 start -->
+        {% block content-panel %}{% endblock %}
+        <!-- 内容 end -->
     </div>
-            
-
-
-
 
     </div>
 </div>

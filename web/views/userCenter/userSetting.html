@@ -1,0 +1,69 @@
+{% extends "../userCenter_content_base.html" %}
+		{% block header_navs %}
+		    <li {% if first_nav_name == 'project' %}class="active"{% endif %}><a href="/userCenter/userCenter/">个人中心</a></li>
+		{% endblock %}
+		{% block content-panel %}
+			<div class="xui-i-content ">
+			
+				<div class="form-group">
+                <label for="pad_background" class="col-sm-3 control-label">上传头像</label>
+                <div class="col-sm-4">                    
+                    <div data-ui-role="image-selector-view"></div>  
+                    <input 
+                        data-ui-role="image-selector"
+                        type="hidden" 
+                        name="pad_background" 
+                        id="user_img" 
+                        data-width="2048"
+                        data-height="2616" 
+                        data-size-limit="800"
+                        data-is-show-height-alert="false"
+                        data-force-validate="true"
+                        data-validate="require-notempty"
+                        value="{{ user.user_img }}"/>
+                    <div class="errorHint"></div>                 
+                </div>
+            </div>
+
+
+				<div class="cb"></div>
+				<!-- <div class="" id="container"></div> -->
+					<span class="btn btn-success xa-submit" data-id={{user.id}}>保存</span>
+			</div>
+
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript">
+	$(document).ready(function() {
+	
+		$(document).delegate(".xa-submit","click",function(){
+			var data = {};
+			var user_img = $('#user_img').val();
+			data.user_img = user_img;
+			console.log(data);
+			W.Resource.post({
+				resource: 'userCenter.userSetting',
+				data: data,
+				success: function(data) {
+					W.showHint('success', '成功，重新加载页面...');
+					_.delay(function() {
+					    window.location.reload();
+					}, 1000);
+				},
+				error: function() {
+				W.showHint('error', '更新失败！');
+	    		}
+			})		
+		})
+
+	});
+</script>
+
+<script type="text/jsx">
+		ReactDOM.render(
+			<calendar />,
+			document.getElementById("cal"),
+   		)
+	</script>
+{% endblock %}

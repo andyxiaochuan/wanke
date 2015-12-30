@@ -1,0 +1,68 @@
+{% extends "../userManger_content_base.html" %}
+        {% block header_navs %}
+            <li {% if first_nav_name == 'project' %}class="active"{% endif %}><a href="/userCenter/userCenter/">个人中心</a></li>
+        {% endblock %}
+        {% block content-panel %}
+    <div class="xui-userCenterPage">
+                <div class="xui-i-content">
+                    <table class="table table-bordered table-striped mt10 ">
+                        <thead>
+                            <tr>
+                                <th>用户</th>
+                                <th>头像</th>
+                                <th>等级</th>
+                                <th>性别</th>
+                  
+                                <th>操作</th>
+          
+                            </tr>
+                        </thead>
+                            <tbody>
+                            {% for user in users %}
+                            <tr>
+                                <td>{{user.name}}-----{{ user.is_verify }}</td>
+                                <td>
+                                    <div  class="xui-userHeaderSmall" style="background-image:url(/static/img/user/{{user.name}}.jpg)"></div>
+                                  
+                                </td>
+                                <td> {{ user.grade }} </td>
+                                <td> {% if user.six ==1 %} 男{% else %} 女 {% endif %} </td>
+                               
+                                <td> <span class="btn btn-primary xa-changeState" data-userid="{{ user.id }}">通过</span>　 <span class="btn btn-primary">打回</span></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+    </div>
+    {% endblock %}
+    
+    {% block js %}
+    <script type="text/javascript">
+    
+        $(document).ready(function() {
+        
+            $(document).delegate(".xa-changeState","click",function(){
+                
+                var data = {};
+                data.userid = $(this).attr("data-userid");
+                console.log(data);
+                W.Resource.post({
+                    resource: 'usersManger.audit',
+                    data:data,
+                    success: function(data) {
+                        W.showHint('success', '提交成功');
+                        _.delay(function() {
+                            window.location.reload();
+                        }, 1000);
+                    },
+                    error: function() {
+                        W.showHint('error', '提交失败！');
+                    }
+                });
+            });
+            
+        });
+    </script>
+    {% endblock %}
+    

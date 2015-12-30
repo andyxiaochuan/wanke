@@ -177,7 +177,7 @@
 
 
 
-.xui-wrap .xui-i-right .xui-userHeader{
+.xui-userHeader{
 	width: 120px;
     min-height: 120px;
     /*border-radius: 80px;*/
@@ -189,7 +189,7 @@
     float: left;
 }
 
-.xui-wrap .xui-i-right .xui-userHeaderSmall{
+.xui-userHeaderSmall{
   width:60px;
   min-height:60px;
   /*border-radius: 80px;*/

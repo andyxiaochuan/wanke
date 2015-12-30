@@ -19,6 +19,7 @@ var debug = require('debug')('dorado:account');
  */
 var settings = require('settings');
 var accountModels = require('routes/account/models')
+var _ = require('underscore');
 
 /**
  * local module
@@ -38,20 +39,33 @@ router.get('/', function(req, res, next) {
 
 
 router.put('/', function(req, res, next) {
-	var user = new accountModels.User({
-		name: req.POST.username,
-		real_name: req.POST.username,
-		password: req.POST.password
-	});
-	user.save(function(err) {
-		if (err) {
-			debug('save user fail')
-			next(err);
-		} else {
-			debug('save user success');
-			res.redirect(settings.LOGIN_URL);
+
+	models.User.find().exec(function(err,users){
+		console.log("用户名已存在");console.log("用户名已存在");
+		var names =  _.pluck(users,"name");
+		var name = req.POST.username;
+		var six = req.POST.six;
+		if(_.contains(names,name) ){
+			res.json(200,'用户名已存在');
+			return;
 		}
-	});
+		else{
+			var user = new models.User({
+				name: req.POST.username,
+				real_name: req.POST.username,
+				password: req.POST.password
+			});
+			user.save(function(err) {
+				if (err) {
+					debug('save user fail')
+					next(err);
+				} else {
+					debug('save user success');
+					res.json({code:200});
+				}
+			});
+		}
+	})
 })
 
 
