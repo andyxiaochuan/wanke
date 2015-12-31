@@ -21,7 +21,8 @@
 										<select name="" id="" class="xa-ownerRegionalId">
 											<option>请选择区服</option>
 											{% for regional in regionals %}
-											<option value="{{regional.id}}">{{regional.name}}</option>
+
+											<option value="{{regional.id}}">{{regional.name}} {{regional.select}}</option>
 											{% endfor %}
 										</select>
 									</div>

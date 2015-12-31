@@ -38,8 +38,9 @@
 										{% endif %} 
 									{% endif %}
 								</td>
+	
+								
 								<td> 
-									------{{order.ifEvaluated}}-------
 									{% if order.state == 0 %} 
 										<span class="btn btn-primary xa-changeState" data-id={{order.id}} data-action=1>确认完成</span>
 										<span class="btn btn-primary xa-changeState" data-id={{order.id}} data-action=2>退单</span>
@@ -48,7 +49,12 @@
 											<span class="btn btn-primary xa-changeState" data-id={{order.id}}>取消退单</span>
 										{% else %} 
 											{% if order.state == 2 %} 
-												<a href="/evaluate/evaluate/?order_id={{order.id}}&coachId={{order.seller.id}}">去评价</a>
+												{% if order.ifEvaluated ==1 %}
+													已评价
+												{% else %}
+													<a href="/evaluate/evaluate/?order_id={{order.id}}&coachId={{order.seller.id}}">去评价</a>
+												{% endif %}
+												
 											{% else %} 
 												<span >已退单</span>
 											{% endif %}

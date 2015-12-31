@@ -34,15 +34,34 @@ router.get('/', function(req, res, next) {
 			regionalModels.regional.find().sort({_id:-1}).exec(function(err, regionals) {
 				//console.log("===============",regionals);
 
-				var c = RequestContext(req, {
-					normalcompany : normalcompanys,
-					is_coach: req.user.is_coach,
-					regionals: regionals
-				});
+				
+
 				if(normalcompanys == null){
+					var c = RequestContext(req, {
+						normalcompany : normalcompanys,
+						is_coach: req.user.is_coach,
+						regionals: regionals
+					});
 					res.render('normalcompany/add_normalcompany.html', c)
 				}
 				else{
+					var datas = {};
+					datas = regionals.map(function(regional) {
+						var data = regional.toJSON();
+						if(regional._id == normalcompanys.ownerRegionalId){
+							data['select'] = 1
+						}
+						else{
+							data['select'] = 0
+						}
+						return data;
+					});
+					console.log("datas",datas);
+					var c = RequestContext(req, {
+						normalcompany : normalcompanys,
+						is_coach: req.user.is_coach,
+						regionals: datas
+					});
 					res.render('normalcompany/edit_normalcompany.html', c)
 				}
 

@@ -1,7 +1,7 @@
-/*!
+ /*!
  * dorado
  *
- * Copyright(c) gaochuan
+ * Copyright(c) 2012-2015 weizoom
  * MIT Licensed
  */
 
@@ -19,33 +19,49 @@ var dumpRequest = require('core/dump_request').dumpRequest;
 var RequestContext = require('core/request_context').RequestContext;
 var settings = require('settings');
 
-var models = require('./models');
+var newsmodels = require('../news/models');
 
 
 router.get('/', function(req, res, next) {
-	
-		models.regional.find().sort({_id:-1}).exec(function(err, regionals) {
+
+	var newsid = req.GET.newsid;
+	if (newsid) {
+		newsmodels.news.findOne({_id:newsid}).exec(function(err,news) {
+			console.log('llllllllllllll',news)
 			if (err) {
 				return next(err);
 			}
 			var c = RequestContext(req, {
-				regionals : regionals,
+				title: req.user.is_coach,
+				content: req.GET.content,
+				news: news,
 			});
 
-			res.render('regional/regional.html', c)
+			res.render('usersManger/eidtnews.html', c)
+			
 		});
+	}
+	else{
+		
+		var c = RequestContext(req, {
+			title: req.user.is_coach,
+			
+		});
+		res.render('usersManger/news.html', c)
+		
+	}
+		     
 }.require(precondition.login_required));
 
 
 router.post('/', function(req, res, next) {
 	//鏇存柊project
 	var updateOp = {$set:{
-		name  :  req.POST.name,
-	ownCarrieroperator  :  req.POST.ownCarrieroperator,
-	
+		content  :  req.POST.content,
+		title  :  req.POST.title,
 	}};
 
-	models.regional.update({ }, updateOp).exec(function(err) {
+	newsmodels.news.update({ _id: req.POST.userid }, updateOp).exec(function(err) {
 		if (err) {
 			console.log(err);
 			return 
@@ -55,17 +71,16 @@ router.post('/', function(req, res, next) {
 }.require(precondition.login_required));
 
 router.put('/', function(req, res, next) {
-	//鍒涘缓project
 	console.log(req.POST);
-	var regional = new models.regional({
-		name  :  req.POST.name,
-	ownCarrieroperator  :  req.POST.ownCarrieroperator,
-		
+	var news = new newsmodels.news({
+		content  :  req.POST.content,
+		title  :  req.POST.title,
 	});
-	regional.save(function(err) {
+	news.save(function(err) {
 		if (err) {
 			return next(err);
 		}
+		console.log(err)
 
 		res.json({code:200});
 	});
@@ -73,8 +88,7 @@ router.put('/', function(req, res, next) {
 
 
 router.delete('/', function(req, res, next) {
-	console.log('here');
-	models.regional.find({_id:req.POST.regional_id}).remove(function(err) {
+	newsmodels.news.find({_id:req.POST.newsid}).remove(function(err) {
 		if (err) {
 			return next(err);
 		}

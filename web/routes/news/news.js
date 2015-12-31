@@ -24,12 +24,32 @@ var models = require('./models');
 
 router.get('/', function(req, res, next) {
 
+	var newsid = req.GET.newsid;
+	if (newsid) {
+		models.news.findOne({_id:newsid}).exec(function(err,news) {
+			console.log('llllllllllllll',news)
+			if (err) {
+				return next(err);
+			}
 			var c = RequestContext(req, {
 				title: req.user.is_coach,
 				content: req.GET.content,
+				news: news,
 			});
 
 			res.render('news/news.html', c)
+			
+		});
+	}
+	else{
+		
+		var c = RequestContext(req, {
+			title: req.user.is_coach,
+			content: req.GET.content,
+		});
+		res.render('news/news.html', c)
+		
+	}
 		     
 }.require(precondition.login_required));
 

@@ -1,0 +1,161 @@
+{% extends "../content_base.html" %}
+
+{% block html_css %}
+
+{% endblock %}
+{% block header_navs %}
+    <li {% if first_nav_name == 'project' %}class="active"{% endif %}><a href="/userCenter/userCenter/">个人中心</a></li>
+{% endblock %}
+{% block content-panel %}
+<div class="xa-projectsPage xui-projectPage" style="">
+     
+
+    <div class="xui-wrap">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <!-- <span class=" mr20 mt10" value=0>电信</span>
+                <span class=" mr20 mt10" value=1>网通</span> -->
+                <span>选择区服索引</span>
+            </div>
+            <div class="panel-body">
+                {% for regional in regionals %}
+                <span class="btn btn-default mr20 mt10 xa-regional" value={{regional.id}}>{{regional.name}}--{% if regional.ownCarrieroperator == 0%} 电信{% else %}  网通{% endif %}</span>
+                 
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-5" style="padding-top:7px;">
+                <span class="pr10">价格</span>
+                <span class="pr10">等级</span>
+                <span class="pr10">战斗力</span>
+                <span class="pr10">等级</span>
+                {{normalcompanys}}
+                <span  >男</span>
+                  <input  class="xa-condition xa-six" data-condition="boy" name="six" type="checkbox" />
+                <span  >女</span>
+                  <input  class="xa-condition xa-six" data-condition="girl" name="six" type="checkbox" />
+              <!--   <span >包赢</span>
+                  <input  class=" xa-condition" data-condition="win" type="checkbox" />
+                <span >视频认证</span> 
+                  <input class=" xa-condition" data-condition="win" type="checkbox" />-->
+                <!-- <span class="btn btn-danger fr  xa-condition" data-condition="video">search</span> -->
+            </div>
+            <div class="col-md-7">
+                <div class="input-group">
+                <input type="text" class="form-control xa-name" placeholder="大神名称进行索引" aria-describedby="basic-addon2"/>
+                <span class="input-group-addon xa-search btn-danger" id="basic-addon2">搜索</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="xui-coach">
+            {% for coach in users %}
+            <div class="xui-box {% if loop.first %} {% else %} {% if (loop.index+1)%5 ==1 %} xui-box-last {% else %} {% endif %} {% endif %} ">
+                <a href="/normalcompany/normalcompanyDetail/?coachid={{coach.id}}">
+                    <div class="xui-img" style="background-image:url({{ coach.user_img }})"></div>
+                    <div class="xui-info">
+                    
+                        <p>{{ coach.name }}</p>
+                        <p>  单价{{ coach.normalcompany.price }}￥
+                        </p>
+                        <!-- <p>密码：{{ coach.password }}</p> -->
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+      <!--   <div class="xui-friend-box">
+            <p>好友推荐</p>
+            <div class="xui-friend" style="background-image:url(/static/img/user/user1.jpg)"></div>
+            <div class="xui-friend" style="background-image:url(/static/img/user/user2.jpg)"></div>
+            <div class="xui-friend" style="background-image:url(/static/img/user/user3.jpg)"></div>
+            <div class="xui-friend" style="background-image:url(/static/img/user/user4.jpg)"></div>
+            <div class="xui-friend" style="background-image:url(/static/img/user/user5.jpg)"></div>
+            <div class="xui-friend" style="background-image:url(/static/img/user/user6.jpg)"></div>
+        </div> -->
+
+        <div class="cb"></div>
+        
+    </div>
+
+<div class="cb"></div>
+       <!-- Swiper -->
+
+
+
+  
+
+{% endblock %}
+
+
+{% block js %}
+<script type="text/javascript">
+
+
+    $(document).delegate(".xa-ownCarrieroperator","click",function(){
+        var ownCarrieroperator = $(this).attr("value");
+        window.location.href="/heigthlevel/heigthlevels/?ownCarrieroperator="+ownCarrieroperator;
+    })
+
+    $(document).delegate(".xa-regional","click",function(){
+        var regional = $(this).attr("value");
+        window.location.href="/heigthlevel/heigthlevels/?regional="+regional;
+    })
+
+    $(document).delegate(".xa-search","click",function(){
+
+        // if($(this).attr("name")=="six") {
+        //     if($(this).is(':checked')){
+        //         alert("checked");
+        //     }
+        //     //$(".xa-six").removeAttr("checked");//取消全选
+        //      // $("[name='xa-six'][checked]").removeAttr("checked");//取消全选
+        //    // $(this).attr("checked",'false');//取消全选
+           
+        // }
+
+        var condition = '';
+        $(".xa-condition").each(function(){
+            if($(this).is(':checked')){
+                condition+=$(this).attr("data-condition")+",";
+            }
+        })
+
+        if($(".xa-name").val()){
+            window.location.href="/heigthlevel/heigthlevels/?conditions="+condition+"&name="+$(".xa-name").val();
+        }
+        else{
+            window.location.href="/heigthlevel/heigthlevels/?conditions="+condition;
+        }
+       
+        // var data = { };
+        // data.conditions = condition;
+    
+        // W.Resource.get({
+        //     resource: 'coach.coachs',
+        //     data: data,
+        //     success: function(data) {
+        //         W.showHint('success', '成功，重新加载页面...');
+        //         _.delay(function() {
+        //             window.location.reload();
+        //         }, 1000);
+        //     },
+        //     error: function() {
+        //     W.showHint('error', '更新失败！');
+        //     }
+        // })  
+    })
+
+    var mySwiper = new Swiper('.swiper-container',{
+        pagination: '.swiper-pagination',
+        autoplay : 3000,
+        speed : 4000,
+        grabCursor: true,
+        centeredSlides: true,
+        slidesPerView: 'auto',
+        
+    })
+</script>
+{% endblock %}

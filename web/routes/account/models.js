@@ -18,6 +18,7 @@ var UserSchema = new mongoose.Schema({
 	is_superuser: {type:Boolean, default:false},
 	name: String,
 	real_name: String,
+	six : {type:Number, default:0},
 	grade:  {type:Number, default:0},
 	is_active: {type:Boolean, default:true},
 	is_coach: {type:Boolean, default:false},

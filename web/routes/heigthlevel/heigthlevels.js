@@ -12,12 +12,15 @@ var dumpRequest = require('core/dump_request').dumpRequest;
 var RequestContext = require('core/request_context').RequestContext;
 var userModels = require('../account/models');
 var orderModels = require('../order/models');
-var newsModels = require('../news/models');
 var normalcompanyModels = require('../normalcompany/models');
+var regionalModels = require('../regional/models');
 
 
 router.get('/', function(req, res, next) {
-	//console.log('alluser---------',req.user.id);
+	console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
+console.log("juiuouu",req.GET.regional);
+console.log('jjjjjjjjjjjjj');
+
 
 	var sqlquery = {is_coach:true};
 	if(req.GET.conditions) {
@@ -91,6 +94,7 @@ router.get('/', function(req, res, next) {
 						var _users = [];
 						users.map(function(user){
 							normalcompanys.map(function(normalcompany){
+
 								if(normalcompany.ownerUserId == user._id){
 									user.normalcompany =  normalcompany;
 									if(req.GET.name){
@@ -98,26 +102,39 @@ router.get('/', function(req, res, next) {
 											_users.push(user);
 										}
 									}else{
-										_users.push(user);
+										if(req.GET.regional){
+											console.log("juiuouu",req.GET.regional);
+											if(user.normalcompany.ownerRegionalId == req.GET.regional){
+
+												
+												_users.push(user);
+											}
+										}
+										else{
+											_users.push(user);
+										}
 									}
 									//console.log("========================="+req.GET.name+"===============================");
 								}
 							})
 						})
 
-						newsModels.news.find().sort({_id:-1}).exec(function(err,newses) {
+
+
+
+
+						regionalModels.regional.find().exec(function(err, regionals) {
 							if (err) {
 								return next(err);
 							}
-							
 							var c = RequestContext(req, {
 								users: _users,
 								is_coach: req.user.is_coach,
 								orders: data,
-								newses: newses,
+								regionals: regionals
 							});
-							res.render('coach/coachs.html', c);
-						});
+							res.render('heigthlevel/heigthlevels.html', c);
+						})
 					})
 
 

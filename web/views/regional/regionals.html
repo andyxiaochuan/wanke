@@ -1,96 +1,77 @@
-{% extends "../content_base.html" %}
-	{% block header_navs %}
-	    <li {% if first_nav_name == 'project' %}class="active"{% endif %}><a href="/userCenter/userCenter/">个人中心</a></li>
-	{% endblock %}
-	{% block content-panel %}
-	
-	<div class="xui-userCenterPage">
-	
-		<div class="xui-wrap">
-			<div class="xui-i-left xui-shadow">
-				<ul>
-					<li><a href="/userCenter/userCenter">我的主页</a></li>
-					<li><a href="/product/product" class="active">发布订单</a></li>
-					<li><a href="/product/products">已购订单</a></li>
-					<li><a href="">账号设置</a></li>
-					<li><a href="">账户充值</a></li>
-					<li><a href="">我的积分</a></li>
-				</ul>
-			</div>
-			<div class="xui-i-right">
-				<div class="xui-i-content xui-shadow">
-					{% for user in userList %}
-					<div>
-						<div class="xui-userHeader" style="background-image:url(/static/img/user/{{user.name}}.jpg)"></div>
-						<div class="xui-userInfo fl">
-							<div>
-								{{user.name}} 
-							</div>
-							<div >
-								<div class="fl">资料完成程度:60%</div>
-								<div class="progress w200 fl">
-									<div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
-									</div>
-								</div>
-								
-								<a href="" class="m10">完善资料</a>
-	
-							</div>
-							<div class="cb">
-								账户余额
-							</div>
-							<div>
-								你不是会员 <a href="" class="ml20">加入会员</a>
-							</div>
+{% extends "../userManger_content_base.html" %}
+        {% block header_navs %}
+            <li {% if first_nav_name == 'project' %}class="active"{% endif %}><a href="/userCenter/userCenter/">个人中心</a></li>
+        {% endblock %}
+        {% block content-panel %}
+
+			<div class="xui-i-content ">
+				{% for user in userList %}
+				<div>
+					<div class="xui-userHeader" style="background-image:url(/static/img/user/{{user.name}}.jpg)"></div>
+					<div class="xui-userInfo fl">
+						<div>
+							{{user.name}} 
 						</div>
-						<div class="fl pl30">
-							<div>
-								我的积分：<span class="xui-color-orange font16 fb">50</span>
-							</div>
-							<div>
-								<a href="">如何获取积分</a>
+						<div >
+							<div class="fl">资料完成程度:60%</div>
+							<div class="progress w200 fl">
+								<div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+								</div>
 							</div>
 							
+							<a href="" class="m10">完善资料</a>
+
+						</div>
+						<div class="cb">
+							账户余额
+						</div>
+						<div>
+							你不是会员 <a href="" class="ml20">加入会员</a>
 						</div>
 					</div>
-					{% endfor %}
-					<a class="glyphicon glyphicon-plus btn btn-primary" href="/regional/regional/">Add regional </a>
-					<table class="table table-bordered table-striped mt10 ">
-						<thead>
-							<tr>
-							
-								<th>大区名称</th>
-								
-								<th>运营商</th>
-								
-								<th>操作</th>
-							</tr>
-						</thead>
-							<tbody>
-							{% for regional in regionals %}
-							<tr>
-								
-								<td>{{regional.name}}</td>
-								
-								<td>{% if regional.ownCarrieroperator == 0%} 电信{% else %} 网通 {% endif %}</td>
-								
-								<td> 
-									<a class="btn btn-primary " href="/regional/regional/?regional_id={{regional.id}}"> 编辑</a>
-									<a href="javascript:void(0);" class="btn btn-danger xa-delete" data-id={{regional.id}}>删除</a>  
-								</td>
-							</tr>
-							{% endfor %}
-						</tbody>
-					</table>
-				
-					
+					<div class="fl pl30">
+						<div>
+							我的积分：<span class="xui-color-orange font16 fb">50</span>
+						</div>
+						<div>
+							<a href="">如何获取积分</a>
+						</div>
+						
+					</div>
 				</div>
-			</div>
-		</div>
+				{% endfor %}
+				<a class="glyphicon glyphicon-plus btn btn-primary" href="/regional/regional/">添加区服</a>
+				<table class="table table-bordered table-striped mt10 ">
+					<thead>
+						<tr>
+						
+							<th>大区名称</th>
+							
+							<th>运营商</th>
+							
+							<th>操作</th>
+						</tr>
+					</thead>
+						<tbody>
+						{% for regional in regionals %}
+						<tr>
+							
+							<td>{{regional.name}}</td>
+							
+							<td>{% if regional.ownCarrieroperator == 0%} 电信{% else %} 网通 {% endif %}</td>
+							
+							<td> 
+								
+								<a href="javascript:void(0);" class="btn btn-danger xa-delete" data-id={{regional.id}}>删除</a>  
+							</td>
+						</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			
 				
-		
-		
-	</div>
+			</div>
+
 	{% endblock %}
 	
 	{% block js %}
@@ -101,7 +82,7 @@
 			$(document).delegate(".xa-delete","click",function(){
 				var regional_id = $(this).attr("data-id");
 				W.Resource.delete({
-	                    resource: 'project.regional',
+	                    resource: 'regional.regional',
 	                    data: {
 	                        regional_id: regional_id
 	                    },

@@ -23,6 +23,7 @@ var settings = require('settings');
 var models = require('./models');
 var regionalModels = require('../regional/models');
 var userModels = require('../account/models');
+var evaluateModels = require('../evaluate/models');
 
 
 router.get('/', function(req, res, next) {
@@ -41,22 +42,34 @@ router.get('/', function(req, res, next) {
 						return next(err);
 					}
 
-					console.log("pppppp",coach)
-					var d = new Date();
-					var date = (d.getYear()+"-"+(d.getMonth()+1)+d.getDate());
-					var dates = []
-					dates.push (Timecalculation(date, 'next',1));
-					dates.push (Timecalculation(date, 'next',2));
-					dates.push (Timecalculation(date, 'next',3));
-					var c = RequestContext(req, {
-						normalcompany : normalcompany,
-						is_coach: req.user.is_coach,
-						regional: regional,
-						coach: coach,
-						dates: dates,
+					evaluateModels.evaluate.find({coachId:req.GET.coachid}).sort({_id:-1}).exec(function(err, evaluates) {
+						if (err) {
+							return next(err);
+						}
+						
+						console.log("pppppp",coach)
+						coach.evaluates = evaluates;
+						console.log('evaluates',evaluates);
+						var d = new Date();
+						var date = (d.getYear()+"-"+(d.getMonth()+1)+d.getDate());
+						var dates = []
+						dates.push (Timecalculation(date, 'next',1));
+						dates.push (Timecalculation(date, 'next',2));
+						dates.push (Timecalculation(date, 'next',3));
+						var c = RequestContext(req, {
+							normalcompany : normalcompany,
+							is_coach: req.user.is_coach,
+							regional: regional,
+							coach: coach,
+							dates: dates,
+						});
+						
+						res.render('normalcompany/normalcompanyDetail.html', c);
+
 					});
-					
-					res.render('normalcompany/normalcompanyDetail.html', c)
+
+
+
 				});
 				
 

@@ -53,7 +53,8 @@ router.put('/', function(req, res, next) {
 			var user = new models.User({
 				name: req.POST.username,
 				real_name: req.POST.username,
-				password: req.POST.password
+				password: req.POST.password,
+				six: req.POST.six,
 			});
 			user.save(function(err) {
 				if (err) {

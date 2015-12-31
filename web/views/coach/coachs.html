@@ -52,95 +52,59 @@
             
             <div class="swiper-container">
                 <div class="swiper-wrapper">
-                    <div class="swiper-slide xui-slide1">Slide 1</div>
-                    <div class="swiper-slide xui-slide2">Slide 2</div>
-                    <div class="swiper-slide xui-slide3">Slide 3</div>
-                    <div class="swiper-slide xui-slide4">Slide 4</div>
-                    <div class="swiper-slide xui-slide5">Slide 5</div>
+                    <div class="swiper-slide xui-slide1"></div>
+                    <div class="swiper-slide xui-slide2"></div>
+                    <div class="swiper-slide xui-slide3"></div>
+                    <div class="swiper-slide xui-slide4"></div>
+                    <div class="swiper-slide xui-slide5"></div>
                 </div>
             </div>
         </div>
         
 
         <img style= src="/static/img/bk/searchTitle.png" alt="" />
-        <div class="filter-bar clearfix">
-            <div class="sort fl" id="data_filter" url="http://wan.5153.com/?server=&amp;tag=today" filter="" orderby="">
-                <a href="javascript:;" class="by-global" id="orderby_default">综合排序</a>
-                <a href="javascript:;" class="by-price icon-wrap" id="orderby_price"><em class="txt">价格</em></a>
-                <a href="javascript:;" class="by-level icon-wrap" id="orderby_score"><em class="txt">等级</em></a>
-                <a href="javascript:;" class="by-combat icon-wrap" id="orderby_combat"><em class="txt">战斗力</em></a>
-                <span class="by-male"><input type="checkbox" id="filter_boy"><label for="filter_boy">汉子</label></span>
-                <span class="by-female"><input type="checkbox" id="filter_girl"><label for="filter_girl">妹纸</label></span>
-                <span class="by-guarantee"><input type="checkbox" id="filter_win"><label for="filter_win">包赢</label></span>
-                <span class="by-vidoe"><input type="checkbox" id="filter_auth"><label for="filter_auth">视频认证</label></span>
-            </div>
-            <div class="lit-page-nav fr">
-                <span><em class="current-page-num highlight">1</em>/<em class="whole-page-num">4</em>页</span>
-                <a href="javascript:;" class="prev-page disabled">&lt;</a>
-                <a href="http://wan.5153.com/?server=&amp;tag=today&amp;filter=&amp;orderby=&amp;p=2" class="next-page">&gt;</a>
-            </div>
-        </div>
-       <!--  <div >
-            <div class="row">
-                <div class="col-lg-4">
-                </div>
-                <div class="col-lg-4">
-                    <div class="input-group">
-                    <div class="input-group-btn">
-                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action <span class="caret"></span></button>
-                    <ul class="dropdown-menu">
-                    <li><a href="#">Action</a></li>
-                    <li><a href="#">Another action</a></li>
-                    <li><a href="#">Something else here</a></li>
-                    <li role="separator" class="divider"></li>
-                    <li><a href="#">Separated link</a></li>
-                    </ul>
-                    </div>
-                    <input type="text" class="form-control" aria-label="...">
-                    </div>
-                </div>
-                
-            </div>
-            <div class="row mt50"> 
-                <div class="col-lg-4">
-                </div>
-                <div class="col-lg-4">   
-                    <div class="input-group">
-                    <input type="text" class="form-control" aria-label="...">
-                    <div class="input-group-btn">
-                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action <span class="caret"></span></button>
-                    <ul class="dropdown-menu dropdown-menu-right">
-                    <li><a href="#">Action</a></li>
-                    <li><a href="#">Another action</a></li>
-                    <li><a href="#">Something else here</a></li>
-                    <li role="separator" class="divider"></li>
-                    <li><a href="#">Separated link</a></li>
-                    </ul>
-                    </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row mt10">
-                <div class="col-lg-5">
-                </div>
-                <div class="col-lg-4">
-                      <img  src="/static/img/bk/btn_search.png" alt="" />
-                </div>
+      <!--   <div class="panel panel-default">
+            <div class="panel-heading">Panel heading without title</div>
+            <div class="panel-body">
+            Panel content
             </div>
         </div> -->
-       <!--  <ul class="breadcrumb">
-            <li>您当前所在位置</li>
-            <li><a href="/project/projects/">网络</a></li>
-        </ul>  -->
+
+        <div class="row">
+            <div class="col-md-5" style="padding-top:7px;">
+                <span class="pr10">价格</span>
+                <span class="pr10">等级</span>
+                <span class="pr10">战斗力</span>
+                <span class="pr10">等级</span>
+                {{normalcompanys}}
+                <span  >男</span>
+                  <input  class="xa-condition xa-six" data-condition="boy" name="six" type="checkbox" />
+                <span  >女</span>
+                  <input  class="xa-condition xa-six" data-condition="girl" name="six" type="checkbox" />
+              <!--   <span >包赢</span>
+                  <input  class=" xa-condition" data-condition="win" type="checkbox" />
+                <span >视频认证</span> 
+                  <input class=" xa-condition" data-condition="win" type="checkbox" />-->
+                <!-- <span class="btn btn-danger fr  xa-condition" data-condition="video">search</span> -->
+            </div>
+            <div class="col-md-7">
+                <div class="input-group">
+                <input type="text" class="form-control xa-name" placeholder="大神名称进行索引" aria-describedby="basic-addon2"/>
+                <span class="input-group-addon xa-search btn-danger" id="basic-addon2">搜索</span>
+                </div>
+            </div>
+        </div>
+
         <div class="xui-coach">
             {% for coach in users %}
             <div class="xui-box {% if loop.first %} {% else %} {% if (loop.index+1)%5 ==1 %} xui-box-last {% else %} {% endif %} {% endif %} ">
                 <a href="/normalcompany/normalcompanyDetail/?coachid={{coach.id}}">
-                    <div class="xui-img" style="background-image:url(/static/img/user/{{ coach.name }}.jpg)"></div>
+                    <div class="xui-img" style="background-image:url({{ coach.user_img }})"></div>
                     <div class="xui-info">
                     
                         <p>{{ coach.name }}</p>
+                        <p>  单价{{ coach.normalcompany.price }}￥
+                        </p>
                         <!-- <p>密码：{{ coach.password }}</p> -->
                     </div>
                 </a>
@@ -158,7 +122,7 @@
         </div> -->
 
         <div class="cb"></div>
-        <div class="xui-news mt10 fl">
+        <div class="xui-news mt30 fl">
 
 
             <!-- Nav tabs -->
@@ -170,17 +134,24 @@
 
             <!-- Tab panes -->
             <div class="tab-content">
-                <div role="tabpanel" class="tab-pane active" id="home">
+                <div role="tabpanel" class="tab-pane active p20" id="home">
                     <ul>
-                        <li>玩家： ksy 等待游戏----接单：只爱陌生人</li>
-                        <li>玩家： ksy 等待游戏----接单：只爱陌生人</li>
-                        <li>玩家： ksy 等待游戏----接单：只爱陌生人</li>
-                        <li>玩家： ksy 等待游戏----接单：只爱陌生人</li>
+                        {% for order in orders %}
+                            {% if order.state ==0 %}
+                            <li>玩家：{{ order.buyer.name }}----接单：{{ order.seller.name }}</li>
+                            {% else %}
+                            {% endif %}
+                        {% endfor %}
                     </ul>
                 </div>
                 <div role="tabpanel" class="tab-pane" id="profile">
                     <ul>
-                        <li>玩家： ksy 以结束游戏----接单：只爱陌生人</li>
+                        {% for order in orders %}
+                            {% if order.state ==2 %}
+                            <li>玩家：{{ order.buyer.name }}----接单：{{ order.seller.name }}</li>
+                            {% else %}
+                            {% endif %}
+                        {% endfor %}
                     </ul>
 
                 </div>
@@ -188,7 +159,7 @@
             </div>
         </div>
 
-        <div class="xui-news mt10 fr">
+        <div class="xui-news mt30 fr">
 
 
             <!-- Nav tabs -->
@@ -198,13 +169,10 @@
 
             <!-- Tab panes -->
             <div class="tab-content">
-                <div role="tabpanel" class="tab-pane active" id="home">
-                    <ul>
-                        <li>玩家： ksy 等待游戏----接单：只爱陌生人</li>
-                        <li>玩家： ksy 等待游戏----接单：只爱陌生人</li>
-                        <li>玩家： ksy 等待游戏----接单：只爱陌生人</li>
-                        <li>玩家： ksy 等待游戏----接单：只爱陌生人</li>
-                    </ul>
+                <div role="tabpanel" class="tab-pane p20 active" id="home">
+                    {% for news in newses %}
+                        <a href="/news/news/?newsid={{news.id}}">{{news.title}}</a> <br/>
+                    {% endfor %}
                 </div>
                
             </div>
@@ -223,6 +191,51 @@
 
 {% block js %}
 <script type="text/javascript">
+
+    $(document).delegate(".xa-search","click",function(){
+
+        // if($(this).attr("name")=="six") {
+        //     if($(this).is(':checked')){
+        //         alert("checked");
+        //     }
+        //     //$(".xa-six").removeAttr("checked");//取消全选
+        //      // $("[name='xa-six'][checked]").removeAttr("checked");//取消全选
+        //    // $(this).attr("checked",'false');//取消全选
+           
+        // }
+
+        var condition = '';
+        $(".xa-condition").each(function(){
+            if($(this).is(':checked')){
+                condition+=$(this).attr("data-condition")+",";
+            }
+        })
+
+        if($(".xa-name").val()){
+            window.location.href="/coach/coachs/?conditions="+condition+"&name="+$(".xa-name").val();
+        }
+        else{
+            window.location.href="/coach/coachs/?conditions="+condition;
+        }
+       
+        // var data = { };
+        // data.conditions = condition;
+    
+        // W.Resource.get({
+        //     resource: 'coach.coachs',
+        //     data: data,
+        //     success: function(data) {
+        //         W.showHint('success', '成功，重新加载页面...');
+        //         _.delay(function() {
+        //             window.location.reload();
+        //         }, 1000);
+        //     },
+        //     error: function() {
+        //     W.showHint('error', '更新失败！');
+        //     }
+        // })  
+    })
+
     var mySwiper = new Swiper('.swiper-container',{
         pagination: '.swiper-pagination',
         autoplay : 3000,

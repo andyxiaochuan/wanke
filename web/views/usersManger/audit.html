@@ -20,7 +20,7 @@
                             <tbody>
                             {% for user in users %}
                             <tr>
-                                <td>{{user.name}}-----{{ user.is_verify }}</td>
+                                <td>{{user.name}}</td>
                                 <td>
                                     <div  class="xui-userHeaderSmall" style="background-image:url(/static/img/user/{{user.name}}.jpg)"></div>
                                   
@@ -28,7 +28,7 @@
                                 <td> {{ user.grade }} </td>
                                 <td> {% if user.six ==1 %} 男{% else %} 女 {% endif %} </td>
                                
-                                <td> <span class="btn btn-primary xa-changeState" data-userid="{{ user.id }}">通过</span>　 <span class="btn btn-primary">打回</span></td>
+                                <td> <span class="btn btn-primary xa-changeState" data-userid="{{ user.id }}">通过</span>　 </td>
                             </tr>
                             {% endfor %}
                         </tbody>

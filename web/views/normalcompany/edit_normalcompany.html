@@ -11,9 +11,8 @@
 									<label className="col-sm-2 control-label"></label>
 									<div className="col-sm-8">
 										<select name="" id="" class="xa-ownerRegionalId">
-											<option>请选择区服</option>
 											{% for regional in regionals %}
-											<option value="{{regional.id}}">{{regional.name}} {% if regional.ownCarrieroperator==0 %}电信 {% else %} 网通 {% endif %}</option>
+											<option {% if regional.select == 1%} selected {% else %} {% endif %} value="{{regional.id}}">{{regional.name}}</option>
 											{% endfor %}
 										</select>
 									</div>

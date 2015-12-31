@@ -1,0 +1,62 @@
+{% extends "../userManger_content_base.html" %}
+        {% block header_navs %}
+            <li {% if first_nav_name == 'project' %}class="active"{% endif %}><a href="/userCenter/userCenter/">个人中心</a></li>
+        {% endblock %}
+        {% block content-panel %}
+				<div class="xui-i-content">
+					<a class="glyphicon glyphicon-plus btn btn-primary" href="/usersManger/news/">添加文章 </a>
+					<!-- {% for news in newses %}
+						<a href="/usersManger/news/?newsid={{news.id}}">{{news.title}}</a><br/>
+					{% endfor %} -->
+				</div>
+
+				<table class="table table-bordered table-striped mt10 xui-projects">
+			        <thead>
+			            <tr>
+			                <th>文章名称</th>
+			                <th width="350px;">操作</th>
+			            </tr>
+			        </thead>
+			        <tbody>
+			           
+			        	{% for news in newses %}
+			            <tr >
+			                <td class="xui-i-name">
+			                   <a href="/news/news/?newsid={{news.id}}">{{news.title}}</a> 
+			                </td>
+			                <td>                    
+			                    <a href="javascript:void(0);" class="btn btn-danger xa-delete ml10" data-id="{{news.id}}">删除</a>
+			                </td>
+			            </tr>
+						{% endfor %}
+			                    
+			        </tbody>
+			    </table>
+	{% endblock %}
+	
+	{% block js %}
+	<script type="text/javascript">
+	
+		$(document).delegate(".xa-delete","click",function(){
+				var data = {};
+				
+				data.newsid = $(this).attr("data-id");
+				W.Resource.delete({
+					resource: 'usersManger.news',
+					data: data,
+					success: function(data) {
+						W.showHint('success', '成功，重新加载页面...');
+						_.delay(function() {
+						    window.location.reload();
+						}, 1000);
+					},
+					error: function() {
+					W.showHint('error', '更新失败！');
+	        		}
+				})		
+	            
+			})
+
+	</script>
+	{% endblock %}
+	

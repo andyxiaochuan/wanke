@@ -1,0 +1,80 @@
+{% extends "../userManger_content_base.html" %}
+        {% block header_navs %}
+            <li {% if first_nav_name == 'project' %}class="active"{% endif %}><a href="/userCenter/userCenter/">个人中心</a></li>
+        {% endblock %}
+        {% block content-panel %}
+				<div class="xui-i-content">
+									
+					<div class="form-group">
+						<label for="inputEmail3" class="col-sm-1 control-label">标题</label>
+						<div class="col-sm-11">
+							<input type="text" class="form-control xa-title"  placeholder="">
+						</div>
+					</div>
+								
+					<div class="form-group">
+						<label for="inputEmail3" class="col-sm-1 control-label">内容</label>
+						<div class="col-sm-11">
+							<div class="" id="container"></div>
+						</div>
+					</div>
+						
+					
+					
+					<div class="form-group">
+						<span class="btn btn-success mt20 mb30 xa-submit" data-id={{order.id}}>保存</span>
+					</div>
+				</div>
+	{% endblock %}
+	
+	{% block js %}
+	<script type="text/javascript">
+	
+	    $(document).ready(function() {
+			var ue;
+		 	_.delay(function() {
+		 		
+				//$("#xa-html").html(html);
+			    // start uideit
+		    	ue = UE.getEditor('container', {
+				    autoHeight: false
+				});
+							
+				//对编辑器的操作最好在编辑器ready之后再做
+				ue.ready(function() {
+				    //设置编辑器的内容
+				    
+				    //获取html内容，返回: <p>hello</p>
+				    var html = ue.getContent();
+				    //获取纯文本内容，返回: hello
+				    var txt = ue.getContentTxt();
+				});
+				// end
+			 }, 100);
+
+			$(document).delegate(".xa-submit","click",function(){
+				var data = {};
+				
+				data.title = $(".xa-title").val();
+				data.content = ue.getContent();
+				
+				console.log(data);
+				W.Resource.put({
+					resource: 'usersManger.news',
+					data: data,
+					success: function(data) {
+						W.showHint('success', '成功，重新加载页面...');
+						_.delay(function() {
+						    window.location.reload();
+						}, 1000);
+					},
+					error: function() {
+					W.showHint('error', '更新失败！');
+	        		}
+				})		
+	            
+			})
+	    });
+	</script>
+	{% endblock %}
+	

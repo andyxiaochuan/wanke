@@ -33,8 +33,7 @@ router.post('/', function(req, res, next) {
 	idof_tel  :  req.POST.idof_tel,
 	idof_qq  :  req.POST.idof_qq,
 	idof_yy  :  req.POST.idof_yy,
-	is_coach  :  req.POST.is_coach,
-	is_verify  :  req.POST.is_verify,
+	is_coach  :  true,
 	introduction : req.POST.introduction,
 	}};
 
